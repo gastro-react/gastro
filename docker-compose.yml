@@ -5,6 +5,7 @@ services:
       context: backend/docker
     volumes:
       - ./backend:/usr/src/app
+    restart: always
     ports:
       - "3000:3000"
     command: sh -c "npm i && npm start"
@@ -14,6 +15,7 @@ services:
   front:
     build:
       context: frontend/docker
+    restart: always
     volumes:
       - ./frontend:/usr/src/app
     ports:
