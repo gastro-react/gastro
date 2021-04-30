@@ -1,0 +1,36 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: backend/docker
+    volumes:
+      - ./backend:/usr/src/app
+    restart: always
+    ports:
+      - "3000:3000"
+    command: sh -c "npm i && npm start"
+    depends_on:
+      - mongo
+
+  front:
+    build:
+      context: frontend/docker
+    restart: always
+    volumes:
+      - ./frontend:/usr/src/app
+    ports:
+      - "4100:4100"
+    command: sh -c "npm i && npm start"
+    tty: true
+    env_file:
+      - ./.env.dev
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
