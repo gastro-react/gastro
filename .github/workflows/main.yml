@@ -13,7 +13,8 @@ jobs:
 
       - name: Test with pytest
         working-directory: ./frontend
-        run: echo test front
+        run: |
+          echo "test front"
 
   tests_backend:
     name: Test backend application with linters
@@ -25,7 +26,8 @@ jobs:
 
       - name: Test with pytest
         working-directory: ./backend
-        run: echo test backend
+        run: |
+          echo "test backend"
 
   front_build_and_push_to_docker_hub:
     name: Build and Push Frontend image to Docker Hub
