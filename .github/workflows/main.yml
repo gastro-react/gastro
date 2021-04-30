@@ -1,13 +1,15 @@
 name: PickledBananas application workflow
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
 
   front_build_and_push_to_docker_hub:
     name: Build and Push Frontend image to Docker Hub
     runs-on: ubuntu-latest
-    needs: [tests_backend, tests_frontend]
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -36,7 +38,7 @@ jobs:
   backend_build_and_push_to_docker_hub:
     name: Push Backend image to Docker Hub
     runs-on: ubuntu-latest
-    needs: [tests_backend, tests_frontend]
+    needs: []
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
