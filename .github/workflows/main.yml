@@ -3,19 +3,6 @@ name: PickledBananas application workflow
 on: [push]
 
 jobs:
-  tests_frontend:
-    name: Test frontend application with linters
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up linters
-
-      - name: Test with lint
-        working-directory: ./frontend
-        run: |
-          ls
-
 
   front_build_and_push_to_docker_hub:
     name: Build and Push Frontend image to Docker Hub
