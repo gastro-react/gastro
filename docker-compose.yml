@@ -22,6 +22,8 @@ services:
       - "4100:4100"
     command: sh -c "npm i && npm start"
     tty: true
+    env_file:
+      - ./.env.dev
 
   mongo:
     image: mongo

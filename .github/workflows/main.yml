@@ -1,0 +1,163 @@
+name: PickledBananas application workflow
+
+on:
+  push:
+      branches:
+        - main
+
+jobs:
+  tests_frontend:
+    name: Test frontend application with linters
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up linters
+
+    - name: Test with pytest
+      working-directory: ./frontend
+      run: echo 'test front'
+
+  tests_backend:
+    name: Test backend application with linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up linters
+
+      - name: Test with pytest
+        working-directory: ./backend
+        run: echo 'test backend'
+
+  front_build_and_push_to_docker_hub:
+    name: Build and Push Frontend image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: [tests_backend, tests_frontend]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+      - name: Install dependencies and build
+        working-directory: ./frontend
+        run: |
+          npm install
+          npm run build
+      - name: Push Frontend to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend/
+          file: ./frontend/docker/production/nginx/Dockerfile
+          push: true
+          tags: rozarioagro/frontend-pickledbananas:latest
+
+  backend_build_and_push_to_docker_hub:
+    name: Push Backend image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: [tests_backend, tests_frontend]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push Backend to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend
+          file: ./backend/docker/production/Dockerfile
+          push: true
+          tags: rozarioagro/backend-pickledbananas:latest
+
+  gateway_build_and_push_to_docker_hub:
+    name: Push Gateway image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: [tests_backend, tests_frontend]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push Gateway to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./gateway/docker/
+          file: ./gateway/docker/production/nginx/Dockerfile
+          push: true
+          tags: gateway-pickledbananas:latest
+
+
+  deploy:
+    name: Deploy project to production
+    runs-on: ubuntu-latest
+    needs: [gateway_build_and_push_to_docker_hub, backend_build_and_push_to_docker_hub, front_build_and_push_to_docker_hub]
+    steps:
+      - uses: actions/checkout@master
+      - name: copy docker-compose.yaml file to remote
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "./docker-compose.prod.yml"
+          target: "./"
+      - name: copy .env file to remote
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "./.env.prod"
+          target: "./"
+      - name: add secret keys to .env files
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            echo "ADMIN_EMAIL_PASSWORD=${{ secrets.ADMIN_EMAIL_PASSWORD }}" >> .env.prod
+
+
+      - name: executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            mv docker-compose.prod.yml docker-compose.yml
+            docker-compose pull
+            docker-compose up --remove-orphans -d
+            docker image prune -f
+
+#  slack-notifications:
+#    runs-on: ubuntu-20.04
+#    name: Sends a message to Slack when a push, a pull request or an issue is made
+#    steps:
+#      - name: Send message to Slack API
+#        uses: archive/github-actions-slack@v2.0.0
+#        id: notify
+#        with:
+#          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+#          slack-channel: CPPUV5KU0
+#          slack-text: Hello! Event "${{ github.event_name }}" in "${{ github.repository }}" 🤓
+#      - name: Result from "Send Message"
+#        run: echo "The result was ${{ steps.notify.outputs.slack-result }}"

@@ -1,0 +1,40 @@
+version: "3"
+services:
+  gateway:
+    image: rozarioagro/gateway-pickledbananas:latest
+    restart: always
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - front
+      - backend
+
+  backend:
+    image: rozarioagro/backend-pickledbananas:latest
+    restart: always
+    command: sh -c "npm i && npm start"
+    depends_on:
+      - mongo
+
+  front:
+    image: rozarioagro/frontend-pickledbananas:latest
+    restart: always
+    env_file:
+      - ./.env.prod
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
+  static_volume:
+  media_volume:
