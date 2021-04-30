@@ -1,6 +1,8 @@
 ![PickledBananas application workflow](https://github.com/gastro-react/gastro/workflows/PickledBananas%20application%20workflow/badge.svg)
 # gastro
 
+### починил ошибку hot-reload в докере, это новый реакт так тупил. Добавил CI через GitHub Actions. И убрал ошибку в приложении frontend, из-за которой появлялась регулярно ошибка Реакта на экране
+
 ## Как запустить
 Тут все в одном месте.
 1. Клонируйте репозиторий
