@@ -13,7 +13,7 @@ jobs:
 
     - name: Test with pytest
       working-directory: ./frontend
-      run: echo 'test front'
+      run: echo test front
 
   tests_backend:
     name: Test backend application with linters
@@ -25,8 +25,80 @@ jobs:
 
       - name: Test with pytest
         working-directory: ./backend
-        run: echo 'test backend'
+        run: echo test backend
 
+  front_build_and_push_to_docker_hub:
+    name: Build and Push Frontend image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: [tests_backend, tests_frontend]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+      - name: Install dependencies and build
+        working-directory: ./frontend
+        run: |
+          npm install
+          npm run build
+      - name: Push Frontend to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend/
+          file: ./frontend/docker/production/nginx/Dockerfile
+          push: true
+          tags: rozarioagro/frontend-pickledbananas:latest
+
+  backend_build_and_push_to_docker_hub:
+    name: Push Backend image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: [tests_backend, tests_frontend]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push Backend to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend
+          file: ./backend/docker/production/Dockerfile
+          push: true
+          tags: rozarioagro/backend-pickledbananas:latest
+
+  gateway_build_and_push_to_docker_hub:
+    name: Push Gateway image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: [tests_backend, tests_frontend]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push Gateway to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./gateway/docker/
+          file: ./gateway/docker/production/nginx/Dockerfile
+          push: true
+          tags: gateway-pickledbananas:latest
 
 
   deploy:
