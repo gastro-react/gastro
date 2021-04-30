@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/Home/ToDelete.css"],"names":[],"mappings":"AAAA,kBACE,aAAe,CAGjB,iBACE,iBAAmB","file":"static/css/main.2b49da42.css","sourcesContent":[".to-delete__title {\n  margin: 40px 0;\n}\n\n.to-delete__list {\n  padding-left: 20px;\n}\n\n\n// WEBPACK FOOTER //\n// ./src/components/Home/ToDelete.css"],"sourceRoot":""}
