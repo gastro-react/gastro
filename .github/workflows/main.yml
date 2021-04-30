@@ -38,7 +38,6 @@ jobs:
   backend_build_and_push_to_docker_hub:
     name: Push Backend image to Docker Hub
     runs-on: ubuntu-latest
-    needs: []
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -60,7 +59,6 @@ jobs:
   gateway_build_and_push_to_docker_hub:
     name: Push Gateway image to Docker Hub
     runs-on: ubuntu-latest
-    needs: [tests_backend, tests_frontend]
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
