@@ -1,3 +1,4 @@
+![PickledBananas application workflow](https://github.com/gastro-react/gastro/workflows/PickledBananas%20application%20workflow/badge.svg)
 # gastro
 
 ## Как запустить
