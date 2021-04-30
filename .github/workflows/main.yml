@@ -101,49 +101,6 @@ jobs:
           tags: gateway-pickledbananas:latest
 
 
-  deploy:
-    name: Deploy project to production
-    runs-on: ubuntu-latest
-    needs: [gateway_build_and_push_to_docker_hub, backend_build_and_push_to_docker_hub, front_build_and_push_to_docker_hub]
-    steps:
-      - uses: actions/checkout@master
-      - name: copy docker-compose.yaml file to remote
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "./docker-compose.prod.yml"
-          target: "./"
-      - name: copy .env file to remote
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "./.env.prod"
-          target: "./"
-      - name: add secret keys to .env files
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            echo "ADMIN_EMAIL_PASSWORD=${{ secrets.ADMIN_EMAIL_PASSWORD }}" >> .env.prod
-
-
-      - name: executing remote ssh commands to deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            mv docker-compose.prod.yml docker-compose.yml
-            docker-compose pull
-            docker-compose up --remove-orphans -d
-            docker image prune -f
 
 #  slack-notifications:
 #    runs-on: ubuntu-20.04
