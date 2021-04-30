@@ -1,9 +1,9 @@
 name: PickledBananas application workflow
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
+#  push:
+#    branches:
+#      - main
 
 jobs:
 
@@ -25,6 +25,7 @@ jobs:
       - name: Install dependencies and build
         working-directory: ./frontend
         run: |
+          ls
           npm install
           npm run build
       - name: Push Frontend to Docker Hub
@@ -75,7 +76,7 @@ jobs:
           context: ./gateway/docker/
           file: ./gateway/docker/production/nginx/Dockerfile
           push: true
-          tags: gateway-pickledbananas:latest
+          tags: rozarioagro/gateway-pickledbananas:latest
 
 
   deploy:
