@@ -13,8 +13,17 @@ import {
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {
+	
   switch (action.type) {
     case ARTICLE_FAVORITED:
+			console.log(
+				'ARTICLE_FAVORITED',
+				{...state, article: state.articles.map(article=> {
+						console.log (article.slug, action.payload);
+						
+					})}
+				)
+    	return {...state}
     case ARTICLE_UNFAVORITED:
       return {
         ...state,
