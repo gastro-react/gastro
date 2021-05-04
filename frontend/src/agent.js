@@ -3,7 +3,8 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = process.env.API_HOST ? process.env.API_HOST : 'https://api.pickledbananas.com/api';
+// const API_ROOT = process.env.API_HOST ? process.env.API_HOST : 'https://api.pickledbananas.com/api';
+const API_ROOT = process.env.API_HOST ? process.env.API_HOST : 'http://localhost:3000/api';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
@@ -23,10 +24,7 @@ const requests = {
   put: (url, body) =>
     superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
   post: (url, body) =>
-    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody=> {
-    	console.error(responseBody)
-    	return responseBody
-		})
+    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
 };
 
 const Auth = {

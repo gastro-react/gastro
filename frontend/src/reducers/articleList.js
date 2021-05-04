@@ -16,14 +16,19 @@ export default (state = {}, action) => {
 	
   switch (action.type) {
     case ARTICLE_FAVORITED:
-			console.log(
-				'ARTICLE_FAVORITED',
-				{...state, article: state.articles.map(article=> {
-						console.log (article.slug, action.payload);
-						
-					})}
-				)
-    	return {...state}
+			return {
+				...state,
+				articles: state.articles.map(article => {
+					if (article.slug === action.payload.article.slug) {
+						return {
+							...article,
+							favorited: action.payload.article.favorited,
+							favoritesCount: action.payload.article.favoritesCount
+						};
+					}
+					return article;
+				})
+			};
     case ARTICLE_UNFAVORITED:
       return {
         ...state,
