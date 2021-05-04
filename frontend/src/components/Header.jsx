@@ -1,5 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components/macro';
+
+const StyledDiv = styled.div`
+  width: 200px;
+  height: 60px;
+  background-color: blue;
+
+  &:hover {
+    width: 300px;
+  }
+`
+
+const SecondStyledDiv = styled(StyledDiv)`
+  background-color: red;
+`
+
+const StyledLink = styled(Link)`
+  color: red;
+`
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -33,7 +52,7 @@ const LoggedOutView = props => {
 const LoggedInView = props => {
   if (props.currentUser) {
     return (
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul className={styles.additional}>
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
@@ -71,12 +90,13 @@ const LoggedInView = props => {
 class Header extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <div className="container">
-
-          <Link to="/" className="navbar-brand">
+      <nav >
+        <div >
+          <StyledDiv />
+          <SecondStyledDiv />
+          <StyledLink to="/" >
             {this.props.appName.toLowerCase()}
-          </Link>
+          </StyledLink>
 
           <LoggedOutView currentUser={this.props.currentUser} />
 

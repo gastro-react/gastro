@@ -2,9 +2,11 @@
   "name": "react-redux-realworld-example-app",
   "version": "0.1.0",
   "private": true,
+  "module": "true",
   "devDependencies": {
     "cross-env": "^5.1.4",
-    "react-scripts": "1.1.1"
+    "css-loader": "^0.28.7",
+    "react-scripts": "4.0.3"
   },
   "dependencies": {
     "history": "^4.6.3",
@@ -19,6 +21,7 @@
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.1",
+    "styled-components.macro": "^1.0.0",
     "superagent": "^3.8.2",
     "superagent-promise": "^1.1.0"
   },
@@ -27,5 +30,17 @@
     "build": "react-scripts build",
     "test": "cross-env PORT=4100 react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
