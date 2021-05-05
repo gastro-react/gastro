@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { 
-  LikeIcon, 
+import {
+  LikeIcon,
   CloseIcon,
   EditIcon,
   SettingsIcon,
@@ -88,7 +88,7 @@ class Header extends React.Component {
     return (
       <nav >
         <div >
-          <LikeIcon liked="false" />
+          <LikeIcon liked={false} />
           <CloseIcon />
           <EditIcon />
           <SettingsIcon />
