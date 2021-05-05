@@ -1,20 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { 
+  LikeIcon, 
+  CloseIcon,
+  EditIcon,
+  SettingsIcon,
+  TrashIcon,
+  HomeIcon
 
-const StyledDiv = styled.div`
-  width: 200px;
-  height: 60px;
-  background-color: blue;
-
-  &:hover {
-    width: 300px;
-  }
-`
-
-const SecondStyledDiv = styled(StyledDiv)`
-  background-color: red;
-`
+} from './Icons/index';
 
 const StyledLink = styled(Link)`
   color: red;
@@ -92,8 +87,12 @@ class Header extends React.Component {
     return (
       <nav >
         <div >
-          <StyledDiv />
-          <SecondStyledDiv />
+          <LikeIcon liked="false" />
+          <CloseIcon />
+          <EditIcon />
+          <SettingsIcon />
+          <TrashIcon />
+          <HomeIcon />
           <StyledLink to="/" >
             {this.props.appName.toLowerCase()}
           </StyledLink>
