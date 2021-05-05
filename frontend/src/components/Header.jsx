@@ -52,7 +52,8 @@ const LoggedOutView = props => {
 const LoggedInView = props => {
   if (props.currentUser) {
     return (
-      <ul className={styles.additional}>
+      // <ul className={styles.additional}>
+      <ul className=''>
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
@@ -62,13 +63,13 @@ const LoggedInView = props => {
 
         <li className="nav-item">
           <Link to="/editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;New Post
+            <i className='ion-compose'/>&nbsp;New Post
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/settings" className="nav-link">
-            <i className="ion-gear-a"></i>&nbsp;Settings
+            <i className='ion-gear-a'/>&nbsp;Settings
           </Link>
         </li>
 
