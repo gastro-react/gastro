@@ -34,6 +34,8 @@ if(isProduction){
   mongoose.connect(process.env.MONGODB_URI);
 } else {
   mongoose.connect('mongodb://mongo/kitchen');
+  // mongoose.connect('mongodb://127.0.0.1:27017/kitchen');
+	
   mongoose.set('debug', true);
 }
 
@@ -41,7 +43,6 @@ require('./models/User');
 require('./models/Article');
 require('./models/Comment');
 require('./config/passport');
-
 app.use(require('./routes'));
 
 /// catch 404 and forward to error handler
@@ -72,7 +73,7 @@ if (!isProduction) {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.json({'errors': {
+  res.json({'errors !!!!': {
     message: err.message,
     error: {}
   }});
