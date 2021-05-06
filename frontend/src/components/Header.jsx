@@ -18,6 +18,8 @@ import {
   LogoutIcon,
   LoginIcon,
 } from './Icons/index';
+import {SmileIcon, AlienIcon, InvadersIcon, CookIcon, DeveloperIcon} from './AvatarIcons/index'
+
 
 const StyledLink = styled(Link)`
   color: red;
@@ -108,14 +110,20 @@ class Header extends React.Component {
           <ThumbsIcon direction="up"/>
           <ThumbsIcon direction="down"/>
           <FollowingIcon />
-<LogoutIcon />
-<LoginIcon />
+          <LogoutIcon />
+          <LoginIcon />
           <ChevronIcon direction="right"/>
           <ChevronIcon direction="left"/>
           <StyledLink to="/" >
             {this.props.appName.toLowerCase()}
           </StyledLink>
 
+
+          <SmileIcon />
+<AlienIcon /> 
+<InvadersIcon />
+<CookIcon />
+<DeveloperIcon />
           <LoggedOutView currentUser={this.props.currentUser} />
 
           <LoggedInView currentUser={this.props.currentUser} />
