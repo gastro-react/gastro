@@ -40,7 +40,7 @@ const ArticlePreview = props => {
             <div className={styles.AuthorAndInfo}>
               <Link to={`/@${article.author.username}`}>
                 { article.author.image ?
-                    <img src={article.author.image} alt={article.author.username} /> : <CookIcon />
+                    <img src={article.author.image} className={styles.AutorsAvatar} alt={article.author.username} /> : <CookIcon />
                 }
               </Link>
 
