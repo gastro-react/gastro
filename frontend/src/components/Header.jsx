@@ -1,20 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { 
+  LikeIcon, 
+  CloseIcon,
+  EditIcon,
+  SettingsIcon,
+  TrashIcon,
+  HomeIcon,
+  ChevronIcon,
+  CopyIcon, 
+  PaperclipIcon,
+  FollowIcon,
+  UnfollowIcon,
+  ThumbsIcon,
+  FollowingIcon,
+  LogoutIcon,
+  LoginIcon,
+} from './Icons/index';
+import {SmileIcon, AlienIcon, InvadersIcon, CookIcon, DeveloperIcon} from './AvatarIcons/index'
 
-const StyledDiv = styled.div`
-  width: 200px;
-  height: 60px;
-  background-color: blue;
-
-  &:hover {
-    width: 300px;
-  }
-`
-
-const SecondStyledDiv = styled(StyledDiv)`
-  background-color: red;
-`
 
 const StyledLink = styled(Link)`
   color: red;
@@ -92,12 +97,33 @@ class Header extends React.Component {
     return (
       <nav >
         <div >
-          <StyledDiv />
-          <SecondStyledDiv />
+          <LikeIcon liked="false" />
+          <CloseIcon />
+          <EditIcon />
+          <SettingsIcon />
+          <TrashIcon />
+          <HomeIcon />
+          <CopyIcon />
+          <PaperclipIcon />
+          <FollowIcon />
+          <UnfollowIcon />
+          <ThumbsIcon direction="up"/>
+          <ThumbsIcon direction="down"/>
+          <FollowingIcon />
+          <LogoutIcon />
+          <LoginIcon />
+          <ChevronIcon direction="right"/>
+          <ChevronIcon direction="left"/>
           <StyledLink to="/" >
             {this.props.appName.toLowerCase()}
           </StyledLink>
 
+
+          <SmileIcon />
+<AlienIcon /> 
+<InvadersIcon />
+<CookIcon />
+<DeveloperIcon />
           <LoggedOutView currentUser={this.props.currentUser} />
 
           <LoggedInView currentUser={this.props.currentUser} />
