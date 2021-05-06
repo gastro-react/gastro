@@ -1,8 +1,8 @@
-var router = require('express').Router();
-var mongoose = require('mongoose');
-var Article = mongoose.model('Article');
-var Comment = mongoose.model('Comment');
-var User = mongoose.model('User');
+const router = require('express').Router();
+const mongoose = require('mongoose');
+const Article = mongoose.model('Article');
+const Comment = mongoose.model('Comment');
+const User = mongoose.model('User');
 var auth = require('../auth');
 
 // Preload article objects on routes with ':article'
@@ -150,7 +150,8 @@ router.get('/:article', auth.optional, function(req, res, next) {
 });
 
 // update article
-router.put('/:article', auth.required, function(req, res, next) {
+router.put('/:article', auth.required,
+	function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if(req.article.author._id.toString() === req.payload.id.toString()){
       if(typeof req.body.article.title !== 'undefined'){
@@ -196,12 +197,11 @@ router.delete('/:article', auth.required, function(req, res, next) {
 // Favorite an article
 router.post('/:article/favorite', auth.required, function(req, res, next) {
   var articleId = req.article._id;
-
+  
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
-
     return user.favorite(articleId).then(function(){
-      return req.article.updateFavoriteCount().then(function(article){
+			return req.article.updateFavoriteCount().then(function(article){
         return res.json({article: article.toJSONFor(user)});
       });
     });
@@ -254,7 +254,7 @@ router.post('/:article/comments', auth.required, function(req, res, next) {
     comment.author = user;
 
     return comment.save().then(function(){
-      req.article.comments.push(comment);
+      req.article.comments = req.article.comments.concat(comment);
 
       return req.article.save().then(function(article) {
         res.json({comment: comment.toJSONFor(user)});
