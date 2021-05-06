@@ -57,8 +57,8 @@ const Navigation = ({currentUser}) => {
     navItems = [...loggedInNavigation, 
       {
         id: 'navigation-user',
-        link: "/",
-        text: 'Username', // later: currentUser.name
+        link: `/@${currentUser.username}`,
+        text: currentUser.username, 
         icon: <CookIcon width="24px" height="24px" />  
       },
     ]

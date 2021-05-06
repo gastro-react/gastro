@@ -14,7 +14,7 @@ const loggedInNavigation = [
   },
   {
     id: 'navigation-new_post',
-    link: '/',
+    link: '/editor',
     text: 'New post',
     icon: <EditIcon />
   },
@@ -35,7 +35,7 @@ const loggedOutNavigation = [
   },
   {
     id: 'navigation-login',
-    link: '/',
+    link: '/login',
     text: 'Login',
     icon: <LoginIcon />
   },
