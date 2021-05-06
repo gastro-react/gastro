@@ -51,7 +51,7 @@ const ArticlePreview = props => {
 
         <div className="pull-xs-right">
           <button className={favoriteButtonClass} onClick={handleClick}>
-            <i className="ion-heart"></i> {article.favoritesCount}
+            <i className='ion-heart'/> {article.favoritesCount}
           </button>
         </div>
       </div>
