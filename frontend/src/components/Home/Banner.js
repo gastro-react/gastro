@@ -1,19 +1,45 @@
 import React from 'react';
+import styled from 'styled-components'
 
-const Banner = ({ appName, token }) => {
-  if (token) {
-    return null;
-  }
-  return (
-    <div className="banner">
-      <div className="container">
-        <h1 className="logo-font">
-          {appName.toLowerCase()}
-        </h1>
-        <p>Your community project starter pack.</p>
-      </div>
-    </div>
-  );
-};
+const Section = styled.section`
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #1c1c22;
+`
+const StyledBanner = styled.div`
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+`
+const Title = styled.h1`
+  font-family: Spectral, serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 64px;
+  text-align: center;
+  color: #FFFF00;
+  margin-bottom: 8px;
+`
+const SubTitle = styled.p`
+  font-family: Spectral, serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: #fff;
+`
+
+
+const Banner = ({ appName, subtitle = "the new experience is cooked here..." }) => (
+  <Section>
+    <StyledBanner>
+      <Title>{appName.toLowerCase()}</Title>
+      <SubTitle>{subtitle}</SubTitle>
+    </StyledBanner>
+  </Section>
+);
+
 
 export default Banner;
