@@ -1,137 +1,95 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import {
-  LikeIcon,
-  CloseIcon,
-  EditIcon,
-  SettingsIcon,
-  TrashIcon,
-  HomeIcon,
-  ChevronIcon,
-  CopyIcon, 
-  PaperclipIcon,
-  FollowIcon,
-  UnfollowIcon,
-  ThumbsIcon,
-  FollowingIcon,
-  LogoutIcon,
-  LoginIcon,
-} from './Icons/index';
-import {SmileIcon, AlienIcon, InvadersIcon, CookIcon, DeveloperIcon} from './AvatarIcons/index'
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import NavLink from './NavLink'
+import { CookIcon } from './AvatarIcons/index'
+import { loggedInNavigation, loggedOutNavigation } from '../utils/navigationconfig'
 
-
-const StyledLink = styled(Link)`
-  color: red;
+const StyledHeader = styled.header`
+  box-sizing: border-box;
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0;
+`
+const NavBar = styled.nav`
+  width: 100%;
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+`
+const LogoLink = styled(Link)`
+  flex-basis: 30%;
+  font-family: 'Spectral', serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 20px;
+  color: #000;
+  
+  &:hover {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  &:active {
+    text-decoration: none;
+  }
+  &:visited {
+    text-decoration: none;
+  }
+`
+const StyledUl = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
 `
 
-const LoggedOutView = props => {
-  if (!props.currentUser) {
-    return (
-      <ul className="nav navbar-nav pull-xs-right">
+const Navigation = ({currentUser}) => {
+  let navItems;
 
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home page
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">
-            Sign in
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/register" className="nav-link">
-            Sign up
-          </Link>
-        </li>
-
-      </ul>
-    );
+  if (currentUser) {
+    navItems = [...loggedInNavigation, 
+      {
+        id: 'navigation-user',
+        link: "/",
+        text: 'Username', // later: currentUser.name
+        icon: <CookIcon width="24px" height="24px" />  
+      },
+    ]
+  } else {
+    navItems = [...loggedOutNavigation]
   }
-  return null;
+
+    return (
+      <StyledUl>
+        { 
+        navItems.map(({id, link, text, icon}) => (
+          <li key={id}>
+            <NavLink link={link} text={text} icon={icon} />
+          </li>
+        ))
+        }
+      </StyledUl>
+    );
 };
 
-const LoggedInView = props => {
-  if (props.currentUser) {
-    return (
-      // <ul className={styles.additional}>
-      <ul className=''>
-
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/editor" className="nav-link">
-            <i className='ion-compose'/>&nbsp;New Post
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/settings" className="nav-link">
-            <i className='ion-gear-a'/>&nbsp;Settings
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link
-            to={`/@${props.currentUser.username}`}
-            className="nav-link">
-            <span>Hello, {props.currentUser.username}</span>
-          </Link>
-        </li>
-
-      </ul>
-    );
-  }
-
-  return null;
-};
-
-class Header extends React.Component {
-  render() {
-    return (
-      <nav >
-        <div >
-          <LikeIcon liked={false} />
-          <CloseIcon />
-          <EditIcon />
-          <SettingsIcon />
-          <TrashIcon />
-          <HomeIcon />
-          <CopyIcon />
-          <PaperclipIcon />
-          <FollowIcon />
-          <UnfollowIcon />
-          <ThumbsIcon direction="up"/>
-          <ThumbsIcon direction="down"/>
-          <FollowingIcon />
-          <LogoutIcon />
-          <LoginIcon />
-          <ChevronIcon direction="right"/>
-          <ChevronIcon direction="left"/>
-          <StyledLink to="/" >
-            {this.props.appName.toLowerCase()}
-          </StyledLink>
-
-
-          <SmileIcon />
-<AlienIcon /> 
-<InvadersIcon />
-<CookIcon />
-<DeveloperIcon />
-          <LoggedOutView currentUser={this.props.currentUser} />
-
-          <LoggedInView currentUser={this.props.currentUser} />
-        </div>
-      </nav>
-    );
-  }
+const Header = ({currentUser, appName}) => {
+  return (
+    <StyledHeader>
+      <NavBar>
+        <LogoLink to="/" >
+          {appName.toLowerCase()}
+        </LogoLink>
+        <Navigation currentUser={currentUser} />
+      </NavBar>
+    </StyledHeader>
+  );
 }
 
 export default Header;
