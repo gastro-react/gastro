@@ -20,7 +20,7 @@ const loggedInNavigation = [
   },
   {
     id: 'navigation-settings',
-    link: '/',
+    link: '/settings',
     text: 'Settings',
     icon: <SettingsIcon />
   },
