@@ -7,8 +7,16 @@ import {
   EditIcon,
   SettingsIcon,
   TrashIcon,
-  HomeIcon
-
+  HomeIcon,
+  ChevronIcon,
+  CopyIcon, 
+  PaperclipIcon,
+  FollowIcon,
+  UnfollowIcon,
+  ThumbsIcon,
+  FollowingIcon,
+  LogoutIcon,
+  LoginIcon,
 } from './Icons/index';
 
 const StyledLink = styled(Link)`
@@ -93,6 +101,17 @@ class Header extends React.Component {
           <SettingsIcon />
           <TrashIcon />
           <HomeIcon />
+          <CopyIcon />
+          <PaperclipIcon />
+          <FollowIcon />
+          <UnfollowIcon />
+          <ThumbsIcon direction="up"/>
+          <ThumbsIcon direction="down"/>
+          <FollowingIcon />
+<LogoutIcon />
+<LoginIcon />
+          <ChevronIcon direction="right"/>
+          <ChevronIcon direction="left"/>
           <StyledLink to="/" >
             {this.props.appName.toLowerCase()}
           </StyledLink>

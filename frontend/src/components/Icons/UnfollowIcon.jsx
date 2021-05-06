@@ -7,22 +7,21 @@ const Svg = styled.svg`
   height: ${props => props.height || '24px'};
 `
 
-const FollowIcon = ({ width, height, color = '#0a0a0b' }) => (
+const UnfollowIcon = ({ width, height, color = '#0a0a0b' }) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     width={width}
     height={height}
   >
-    <path d="M18 6L6 18" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M6 6L18 18" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M5 12H19" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </Svg>
 )
 
-FollowIcon.propTypes = {
+UnfollowIcon.propTypes = {
   color: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string
 }
 
-export default FollowIcon;
+export default UnfollowIcon;
