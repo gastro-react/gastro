@@ -104,15 +104,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: "./.env.prod"
           target: "./"
-      - name: add secret keys to .env files
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            echo "ADMIN_EMAIL_PASSWORD=${{ secrets.ADMIN_EMAIL_PASSWORD }}" >> .env.prod
-
 
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
