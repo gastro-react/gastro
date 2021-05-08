@@ -56,7 +56,7 @@ const ArticlePreview = props => {
 
             <div className={styles.Favorites} onClick={handleClick}>
               {article.favoritesCount}
-              <LikeIcon liked={article.favorited} width={48} />
+              <LikeIcon liked={article.favorited} width={'48'} />
             </div>
           </div>
 
