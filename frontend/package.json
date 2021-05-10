@@ -11,10 +11,13 @@
   "dependencies": {
     "connected-react-router": "^6.9.1",
     "history": "^4.10.1",
+    "i18next": "^20.2.2",
+    "i18next-browser-languagedetector": "^6.1.1",
     "marked": "^2.0.3",
     "prop-types": "^15.5.10",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-i18next": "^11.8.15",
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

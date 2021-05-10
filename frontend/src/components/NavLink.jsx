@@ -31,6 +31,7 @@ const StyledLink = styled(Link)`
 `
 
 const NavLink = ({ link, text, icon }) => {
+	console.log('navlink', text)
   return (
     <StyledLink to={link}>
       {icon}

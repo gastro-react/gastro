@@ -1,9 +1,24 @@
-import React from 'react'
+
+import React, {useEffect} from 'react';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import NavLink from './NavLink'
 import { CookIcon } from './AvatarIcons/index'
 import { loggedInNavigation, loggedOutNavigation } from '../utils/navigationconfig'
+
+// import i18n from 'i18next';
+import { useTranslation, Trans } from 'react-i18next';
+
+import {
+	HomeIcon,
+	EditIcon,
+	SettingsIcon,
+	LoginIcon,
+} from '../components/Icons/index'
+
+
+
+
 
 const StyledHeader = styled.header`
   box-sizing: border-box;
@@ -50,16 +65,57 @@ const StyledUl = styled.ul`
   align-items: center;
 `
 
+
+
 const Navigation = ({currentUser}) => {
   let navItems;
+	const { t, i18n } = useTranslation();
+	
+	const loggedInNavigation = [
+		{
+			id: 'navigation-main',
+			link: '/',
+			text:t('description.navHome'),
+			icon: <HomeIcon />
+		},
+		{
+			id: 'navigation-new_post',
+			link: '/editor',
+			text: t('description.navNewPost'),
+			icon: <EditIcon />
+		},
+		{
+			id: 'navigation-settings',
+			link: '/settings',
+			text: t('description.navSettings'),
+			icon: <SettingsIcon />
+		},
+	]
+
+	const loggedOutNavigation = [
+		{
+			id: 'navigation-main',
+			link: '/',
+			text: t('description.navHome'),
+			icon: <HomeIcon />
+		},
+		{
+			id: 'navigation-login',
+			link: '/login',
+			text: t('description.navLogin'),
+			icon: <LoginIcon />
+		},
+	]
+  
+  
 
   if (currentUser) {
-    navItems = [...loggedInNavigation, 
+    navItems = [...loggedInNavigation,
       {
         id: 'navigation-user',
         link: `/@${currentUser.username}`,
-        text: currentUser.username, 
-        icon: <CookIcon width="24px" height="24px" />  
+        text: currentUser.username,
+        icon: <CookIcon width="24px" height="24px" />
       },
     ]
   } else {
@@ -68,7 +124,7 @@ const Navigation = ({currentUser}) => {
 
     return (
       <StyledUl>
-        { 
+        {
         navItems.map(({id, link, text, icon}) => (
           <li key={id}>
             <NavLink link={link} text={text} icon={icon} />
@@ -80,7 +136,21 @@ const Navigation = ({currentUser}) => {
 };
 
 const Header = ({currentUser, appName}) => {
-  return (
+	
+	const { t, i18n } = useTranslation();
+	
+	const lngs = {
+		en: { nativeName: 'English' },
+		ru: { nativeName: 'Русский' }
+	};
+	
+	useEffect(()=>{
+		console.log('!!!!!!!', i18n)
+		
+	}, [])
+	
+	
+	return (
     <StyledHeader>
       <NavBar>
         <LogoLink to="/" >
@@ -88,7 +158,15 @@ const Header = ({currentUser, appName}) => {
         </LogoLink>
         <Navigation currentUser={currentUser} />
       </NavBar>
+			<div>
+				{Object.keys(lngs).map((lng) => (
+					<button key={lng} style={{ fontWeight: i18n.language === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
+						{lngs[lng].nativeName}
+					</button>
+				))}
+			</div>
     </StyledHeader>
+	
   );
 }
 

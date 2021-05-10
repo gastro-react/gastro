@@ -16,6 +16,10 @@ import { store } from '../store';
 // import { push } from 'react-router-redux';
 import { push } from 'connected-react-router';
 
+
+import { useTranslation, Trans } from 'react-i18next';
+
+
 const mapStateToProps = state => {
   return {
     appLoaded: state.common.appLoaded,
@@ -32,6 +36,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class App extends React.Component {
+	
+	
   componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
       // this.context.router.replace(nextProps.redirectTo);
