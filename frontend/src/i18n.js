@@ -15,7 +15,6 @@ i18n
 			en: {
 				translation: {
 					description: {
-						navMain: 'Main',
 						navHome: 'Main',
 						navNewPost: 'New Post',
 						navSettings: 'Settings',
@@ -26,7 +25,6 @@ i18n
 			ru: {
 				translation: {
 					description: {
-						navMain: 'Главная',
 						navHome: 'Главная',
 						navNewPost: 'Новая статья',
 						navSettings: 'Установки',

@@ -6,7 +6,7 @@ import NavLink from './NavLink'
 import { CookIcon } from './AvatarIcons/index'
 import { loggedInNavigation, loggedOutNavigation } from '../utils/navigationconfig'
 
-// import i18n from 'i18next';
+import i18n from '../i18n';
 import { useTranslation, Trans } from 'react-i18next';
 
 import {
@@ -69,8 +69,9 @@ const StyledUl = styled.ul`
 
 const Navigation = ({currentUser}) => {
   let navItems;
+  
 	const { t, i18n } = useTranslation();
-	
+
 	const loggedInNavigation = [
 		{
 			id: 'navigation-main',
@@ -106,10 +107,11 @@ const Navigation = ({currentUser}) => {
 			icon: <LoginIcon />
 		},
 	]
-  
-  
 
-  if (currentUser) {
+	console.log ('+++++++++',loggedInNavigation);
+	console.log ('++++++++',loggedOutNavigation);
+	
+	if (currentUser) {
     navItems = [...loggedInNavigation,
       {
         id: 'navigation-user',
@@ -144,10 +146,7 @@ const Header = ({currentUser, appName}) => {
 		ru: { nativeName: 'Русский' }
 	};
 	
-	useEffect(()=>{
-		console.log('!!!!!!!', i18n)
-		
-	}, [])
+		console.log('!!!!!!!', i18n.language)
 	
 	
 	return (
