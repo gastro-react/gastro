@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 import NavLink from './NavLink'
 import { CookIcon } from './AvatarIcons/index'
 import { loggedInNavigation, loggedOutNavigation } from '../utils/navigationconfig'
@@ -79,7 +80,8 @@ const Navigation = ({currentUser}) => {
     );
 };
 
-const Header = ({currentUser, appName}) => {
+const Header = () => {
+  const { currentUser, appName } = useSelector(state => state.common);
   return (
     <StyledHeader>
       <NavBar>

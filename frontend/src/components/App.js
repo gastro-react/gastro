@@ -1,7 +1,5 @@
-import agent from '../agent';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { APP_LOAD, REDIRECT } from '../constants/actionTypes';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Article from './Article';
@@ -12,25 +10,21 @@ import Profile from './Profile';
 import ProfileFavorites from './ProfileFavorites';
 import Register from './Register';
 import Settings from './Settings';
+import { loadApp } from '../services/actions/loadApp';
 
   const App = () => {
     const dispatch = useDispatch();
-    const { appLoaded, appName, currentUser, redirectTo } = useSelector(state => state.common)
+    const { appLoaded } = useSelector(state => state.common)
     
     useEffect(() => {
       const token = window.localStorage.getItem('jwt');
-      if (token) {
-        agent.setToken(token);
-      }
-      dispatch({ type: APP_LOAD, payload: token ? agent.Auth.current() : null, token, skipTracking: true })
-    }, [])
+      dispatch(loadApp(token));
+  }, [])
 
     return appLoaded
       ? (
         <>
-          <Header
-            appName={appName}
-            currentUser={currentUser} />
+          <Header />
           <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/login" component={Login} />
@@ -45,9 +39,7 @@ import Settings from './Settings';
         </>
       )
       : (
-          <Header
-            appName={appName}
-            currentUser={currentUser} />
+          <Header />
       )
 }
 
