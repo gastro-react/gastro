@@ -1,66 +1,68 @@
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Banner from './Banner';
 import MainView from './MainView';
-import React from 'react';
-import Tags from './Tags';
+import Sidebar from './Sidebar';
 import agent from '../../agent';
-import { connect } from 'react-redux';
 import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
 
-const Promise = global.Promise;
+const HomePage = styled.main`
+  max-width: 1440px;
+`;
+const MainContainer = styled.section`
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+`
+const FlexRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+`
+const Home = () => {
+  const dispatch = useDispatch();
+  const { token } = useSelector(state => state.common);
 
-const mapStateToProps = state => ({
-  ...state.home,
-  appName: state.common.appName,
-  token: state.common.token
-});
+  const onClickTag = (tag, pager, payload) => dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload })
 
-const mapDispatchToProps = dispatch => ({
-  onClickTag: (tag, pager, payload) =>
-    dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
-  onLoad: (tab, pager, payload) =>
-    dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
-  onUnload: () =>
-    dispatch({  type: HOME_PAGE_UNLOADED })
-});
+  useEffect(() => {
+    const tab = token ? 'feed' : 'all';
+    const articlesPromise = token 
+      ? agent.Articles.feed
+      : agent.Articles.all;
 
-class Home extends React.Component {
-  componentWillMount() {
-    const tab = this.props.token ? 'feed' : 'all';
-    const articlesPromise = this.props.token ?
-      agent.Articles.feed :
-      agent.Articles.all;
+    Promise.all([agent.Tags.getAll(), articlesPromise()])
+    .then(res => dispatch({ 
+      type: HOME_PAGE_LOADED,
+      tab,
+      pager: articlesPromise,
+      payload: res
+    }))
+    .catch(e => console.log(e))
+    
+    return () => dispatch({ type: HOME_PAGE_UNLOADED })
+  }, [])
 
-    this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
-
-  render() {
     return (
-      <div className="home-page">
-        <Banner token={this.props.token} appName={this.props.appName} />
-        <div className="container page">
-          <div className="row">
+      <HomePage>
+        <Banner />
+        <MainContainer>
+          <FlexRow>
             <MainView />
-            <div className="col-md-3">
-              <div className="sidebar">
-                <p>Popular Tags</p>
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            <Sidebar />
+          </FlexRow>
+        </MainContainer>
+      </HomePage>
     );
-  }
+  
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

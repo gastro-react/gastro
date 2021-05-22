@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 
 const Section = styled.section`
@@ -32,14 +33,19 @@ const SubTitle = styled.p`
 `
 
 
-const Banner = ({ appName, subtitle = "the new experience is cooked here..." }) => (
-  <Section>
-    <StyledBanner>
-      <Title>{appName.toLowerCase()}</Title>
-      <SubTitle>{subtitle}</SubTitle>
-    </StyledBanner>
-  </Section>
-);
+const Banner = () => {
+  const { appName } = useSelector(state => state.common)
+  const subtitle = "the new experience is cooked here..."; // delete hardcode!!
+  
+  return (
+    <Section>
+      <StyledBanner>
+        <Title>{appName.toLowerCase()}</Title>
+        <SubTitle>{subtitle}</SubTitle>
+      </StyledBanner>
+    </Section>
+  )
+}
 
 
 export default Banner;

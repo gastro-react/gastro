@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Article from './Article';
 import Editor from './Editor';
-import Home from './Home';
+import Home from './Home/index';
 import Login from './Login';
 import Profile from './Profile';
 import ProfileFavorites from './ProfileFavorites';
@@ -17,10 +17,6 @@ import Settings from './Settings';
     const dispatch = useDispatch();
     const { appLoaded, appName, currentUser, redirectTo } = useSelector(state => state.common)
     
-/*     useEffect(() => {
-      dispatch({ type: REDIRECT })
-    }, [ redirectTo ])
- */
     useEffect(() => {
       const token = window.localStorage.getItem('jwt');
       if (token) {
@@ -28,16 +24,8 @@ import Settings from './Settings';
       }
       dispatch({ type: APP_LOAD, payload: token ? agent.Auth.current() : null, token, skipTracking: true })
     }, [])
-  /* componentWillMount() {
-    const token = window.localStorage.getItem('jwt');
-    if (token) {
-      agent.setToken(token);
-    }
 
-    this.props.onLoad(token ? agent.Auth.current() : null, token);
-  } */
-
-    return appLoaded 
+    return appLoaded
       ? (
         <>
           <Header
