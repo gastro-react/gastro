@@ -1,4 +1,4 @@
-import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED } from '../constants/actionTypes';
+import { HOME_PAGE_LOADED, HOME_PAGE_UNLOADED } from '../../utils/constants/actionTypes';
 
 export default (state = { tags: null }, action) => {
   switch (action.type) {

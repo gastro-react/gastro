@@ -1,17 +1,19 @@
-import article from './reducers/article';
-import articleList from './reducers/articleList';
-import auth from './reducers/auth';
 import { combineReducers } from 'redux';
-import common from './reducers/common';
-import editor from './reducers/editor';
-import home from './reducers/home';
-import profile from './reducers/profile';
-import settings from './reducers/settings';
+import { connectRouter } from 'connected-react-router'
+import {createBrowserHistory} from 'history';
+
+import article from './services/reducers/article';
+import articleList from './services/reducers/articleList';
+import auth from './services/reducers/auth';
+import common from './services/reducers/common';
+import editor from './services/reducers/editor';
+import home from './services/reducers/home';
+import profile from './services/reducers/profile';
+import settings from './services/reducers/settings';
 // import { routerReducer } from 'react-router-redux';
 // import { routerReducer } from 'connected-react-router';
 // import {history} from "./store";
-import { connectRouter } from 'connected-react-router'
-import {createBrowserHistory} from 'history';
+
 const history = createBrowserHistory();
 
 export default combineReducers({

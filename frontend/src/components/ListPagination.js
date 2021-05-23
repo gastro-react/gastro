@@ -1,28 +1,31 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import agent from '../agent';
-import { connect } from 'react-redux';
-import { SET_PAGE } from '../constants/actionTypes';
+import { SET_PAGE } from '../utils/constants/actionTypes';
 
-const mapDispatchToProps = dispatch => ({
-  onSetPage: (page, payload) =>
+const ListPagination = () => {
+  const dispatch = useDispatch();
+  const { pager, articlesCount, currentPage } = useSelector(state => state.articleList)
+
+  const onSetPage = (page, payload) =>{
     dispatch({ type: SET_PAGE, page, payload })
-});
+  }
 
-const ListPagination = props => {
-  if (props.articlesCount <= 10) {
+  if (articlesCount <= 10) {
     return null;
   }
 
   const range = [];
-  for (let i = 0; i < Math.ceil(props.articlesCount / 10); ++i) {
+  for (let i = 0; i < Math.ceil(articlesCount / 10); ++i) {
     range.push(i);
   }
 
   const setPage = page => {
-    if(props.pager) {
-      props.onSetPage(page, props.pager(page));
+    if(pager) {
+      onSetPage(page, pager(page));
     }else {
-      props.onSetPage(page, agent.Articles.all(page))
+      onSetPage(page, agent.Articles.all(page))
     }
   };
 
@@ -32,9 +35,9 @@ const ListPagination = props => {
 
         {
           range.map(v => {
-            const isCurrent = v === props.currentPage;
-            const onClick = ev => {
-              ev.preventDefault();
+            const isCurrent = v === currentPage;
+            const onClick = e => {
+              e.preventDefault();
               setPage(v);
             };
             return (
@@ -55,4 +58,4 @@ const ListPagination = props => {
   );
 };
 
-export default connect(() => ({}), mapDispatchToProps)(ListPagination);
+export default ListPagination;

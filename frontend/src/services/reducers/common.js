@@ -15,10 +15,10 @@ import {
   SETTINGS_PAGE_UNLOADED,
   LOGIN_PAGE_UNLOADED,
   REGISTER_PAGE_UNLOADED
-} from '../constants/actionTypes';
+} from '../../utils/constants/actionTypes';
 
 const defaultState = {
-  appName: 'Practicum Project Kitchen',
+  appName: 'Pickled Bananas',
   token: null,
   viewChangeCounter: 0
 };

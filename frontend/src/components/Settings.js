@@ -6,7 +6,7 @@ import {
   SETTINGS_SAVED,
   SETTINGS_PAGE_UNLOADED,
   LOGOUT
-} from '../constants/actionTypes';
+} from '../utils/constants/actionTypes';
 
 class SettingsForm extends React.Component {
   constructor() {

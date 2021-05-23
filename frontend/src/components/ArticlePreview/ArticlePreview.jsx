@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../../agent';
 import { connect } from 'react-redux';
-import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../constants/actionTypes';
+import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../../utils/constants/actionTypes';
 import styles from './ArticlePreview.module.css'
 import CookIcon from "../AvatarIcons/CookIcon";
 import LikeIcon from "../Icons/Like";

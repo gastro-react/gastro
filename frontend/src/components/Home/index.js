@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Banner from './Banner';
 import MainView from './MainView';
 import Sidebar from './Sidebar';
-import { HOME_PAGE_UNLOADED } from '../../constants/actionTypes';
+import { HOME_PAGE_UNLOADED } from '../../utils/constants/actionTypes';
 import { loadHomePage } from '../../services/actions/loadHomePage';
 
 const HomePage = styled.main`

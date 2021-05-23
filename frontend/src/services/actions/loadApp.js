@@ -1,7 +1,7 @@
 import agent from '../../agent';
 import {
   APP_LOAD,
-} from '../../constants/actionTypes';
+} from '../../utils/constants/actionTypes';
 
 export const loadApp = (token) => {
   return function(dispatch) {

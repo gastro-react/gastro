@@ -39,7 +39,7 @@ const NavItem = styled.li`
     : ''
   }
   `
-  const NavLink = styled.a`
+const NavLink = styled.a`
   font-family: 'Suisse Intl', sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -76,7 +76,7 @@ const TagFilterTab = ({ tag }) => (
   tag
   ? (
     <NavItem active={true}>
-      <NavLink href="" onClick={()=> {}}>
+      <NavLink href="" onClick={(e)=> {e.preventDefault()}}>
         {'# ' + tag}
       </NavLink>
     </NavItem>
