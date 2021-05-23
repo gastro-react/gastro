@@ -1,66 +1,49 @@
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import Banner from './Banner';
 import MainView from './MainView';
-import React from 'react';
-import Tags from './Tags';
-import agent from '../../agent';
-import { connect } from 'react-redux';
-import {
-  HOME_PAGE_LOADED,
-  HOME_PAGE_UNLOADED,
-  APPLY_TAG_FILTER
-} from '../../constants/actionTypes';
+import Sidebar from './Sidebar';
+import { HOME_PAGE_UNLOADED } from '../../constants/actionTypes';
+import { loadHomePage } from '../../services/actions/loadHomePage';
 
-const Promise = global.Promise;
+const HomePage = styled.main`
+  max-width: 1440px;
+  margin: 0 auto;
+`;
+const MainContainer = styled.section`
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+`
+const FlexRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+`
+const Home = () => {
+  const dispatch = useDispatch();
+  const { token } = useSelector(state => state.common);
 
-const mapStateToProps = state => ({
-  ...state.home,
-  appName: state.common.appName,
-  token: state.common.token
-});
+  useEffect(() => {
+    dispatch(loadHomePage(token));
+    return () => dispatch({ type: HOME_PAGE_UNLOADED });
+  }, [token])
 
-const mapDispatchToProps = dispatch => ({
-  onClickTag: (tag, pager, payload) =>
-    dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
-  onLoad: (tab, pager, payload) =>
-    dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
-  onUnload: () =>
-    dispatch({  type: HOME_PAGE_UNLOADED })
-});
-
-class Home extends React.Component {
-  componentWillMount() {
-    const tab = this.props.token ? 'feed' : 'all';
-    const articlesPromise = this.props.token ?
-      agent.Articles.feed :
-      agent.Articles.all;
-
-    this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
-
-  render() {
     return (
-      <div className="home-page">
-        <Banner token={this.props.token} appName={this.props.appName} />
-        <div className="container page">
-          <div className="row">
+      <HomePage>
+        <Banner />
+        <MainContainer>
+          <FlexRow>
             <MainView />
-            <div className="col-md-3">
-              <div className="sidebar">
-                <p>Popular Tags</p>
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            <Sidebar />
+          </FlexRow>
+        </MainContainer>
+      </HomePage>
     );
-  }
+  
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

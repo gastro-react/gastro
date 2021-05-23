@@ -22,6 +22,7 @@
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.3",
     "styled-components.macro": "^1.0.0",
     "superagent": "^6.1.0",

@@ -1,36 +1,61 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components'
 import agent from '../../agent';
+import { applyTagFilter } from '../../services/actions/applyTagFilter';
 
-const Tags = props => {
-  const tags = props.tags;
-  if (tags) {
-    return (
-      <div className="tag-list">
-        {
-          tags.map(tag => {
-            const handleClick = ev => {
-              ev.preventDefault();
-              props.onClickTag(tag, page => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
-            };
+const TagList = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+`;
+const StyledTag = styled.a`
+  text-decoration: none;
+  background: #f4f4f4;
+  border: 1px solid #e0e0e0;
+  border-radius: 100px;
+  padding: 0 4px;
+  color: #000;
+  transition: background-color .3s linear;
 
-            return (
-              <a
-                href=""
-                className="tag-default tag-pill"
-                key={tag}
-                onClick={handleClick}>
-                {tag}
-              </a>
-            );
-          })
-        }
-      </div>
-    );
-  } else {
-    return (
-      <div>Loading Tags...</div>
-    );
+  &:hover {
+    background: #ff0;
+    text-decoration: none;
   }
+  &:active &:clicked {
+    background: #ff0;
+  }
+`;
+
+const Tag = ({ tag }) => {
+  const dispatch = useDispatch();
+  const handleClick = e => {
+    e.preventDefault();
+    dispatch(applyTagFilter(tag))
+  };
+
+  return (
+    <StyledTag
+      href=""
+      onClick={handleClick}>
+      {tag}
+    </StyledTag>
+  )
+}
+
+const Tags = () => {
+  const { tags } = useSelector(state => state.home);
+  return tags
+    ? (
+      <TagList>
+        {
+          tags.map((tag, index) => <Tag tag={tag} key={index} tag={tag}/>)
+        }
+      </TagList>
+    )
+    : (
+      <span>Loading Tags...</span>
+    )
 };
 
 export default Tags;

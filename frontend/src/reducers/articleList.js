@@ -53,20 +53,20 @@ export default (state = {}, action) => {
     case APPLY_TAG_FILTER:
       return {
         ...state,
-        pager: action.pager,
+        pager: action.payload.pager,
         articles: action.payload.articles,
         articlesCount: action.payload.articlesCount,
         tab: null,
-        tag: action.tag,
+        tag: action.payload.tag,
         currentPage: 0
       };
     case HOME_PAGE_LOADED:
       return {
         ...state,
-        pager: action.pager,
-        tags: action.payload ? (action.payload[0] ? action.payload[0].tags : []):null,
-        articles: action.payload ? (action.payload[1] ? action.payload[1].articles : []):null,
-        articlesCount: action.payload ? (action.payload[1] ? action.payload[1].articlesCount : 0):null,
+        pager: action.payload.pager,
+        tags: action.payload.tags || null,
+        articles: action.payload.articles || null,
+        articlesCount: action.payload.articlesCount || null,
         currentPage: 0,
         tab: action.tab
       };
@@ -75,10 +75,10 @@ export default (state = {}, action) => {
     case CHANGE_TAB:
       return {
         ...state,
-        pager: action.pager,
+        pager: action.payload.pager,
         articles: action.payload.articles,
         articlesCount: action.payload.articlesCount,
-        tab: action.tab,
+        tab: action.payload.tab,
         currentPage: 0,
         tag: null
       };

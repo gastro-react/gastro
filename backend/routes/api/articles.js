@@ -48,10 +48,7 @@ router.get('/', auth.optional, function(req, res, next) {
   Promise.all([
     req.query.author ? User.findOne({username: req.query.author}) : null,
     req.query.favorited ? User.findOne({username: req.query.favorited}) : null
-  ]).then(function(results){
-    var author = results[0];
-    var favoriter = results[1];
-
+  ]).then(([author, favoriter]) => {
     if(author){
       query.author = author._id;
     }
@@ -123,18 +120,18 @@ router.get('/feed', auth.required, function(req, res, next) {
 });
 
 router.post('/', auth.required, function(req, res, next) {
-  User.findById(req.payload.id).then(function(user){
-    if (!user) { return res.sendStatus(401); }
+  User.findById(req.payload.id)
+    .then((user) => {
+      if (!user) return res.sendStatus(401);
 
-    var article = new Article(req.body.article);
+      const article = new Article({...req.body.article, author: user});
 
-    article.author = user;
-
-    return article.save().then(function(){
-      console.log(article.author);
-      return res.json({article: article.toJSONFor(user)});
-    });
-  }).catch(next);
+      return article.save().then(function(){
+        console.log(article.author);
+        return res.json({article: article.toJSONFor(user)});
+      });
+    })
+    .catch(next);
 });
 
 // return a article
