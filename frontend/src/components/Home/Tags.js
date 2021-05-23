@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components'
-import agent from '../../agent';
 import { applyTagFilter } from '../../services/actions/applyTagFilter';
 
 const TagList = styled.div`
+  padding-top: 8px;
   display: flex;
   justify-content: flex-end;
   gap: 4px;

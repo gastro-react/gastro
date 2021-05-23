@@ -38,8 +38,8 @@ const NavItem = styled.li`
     `
     : ''
   }
-`
-const NavLink = styled.a`
+  `
+  const NavLink = styled.a`
   font-family: 'Suisse Intl', sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -47,8 +47,9 @@ const NavLink = styled.a`
   color: inherit;
   display: block;
   text-decoration: none;
-
-  &:hovered {
+  transition: transform .2s linear;
+  
+  &:hover {
     transform: scale(1.1);
   }
   &:active, &:visited {
