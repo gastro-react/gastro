@@ -1,7 +1,7 @@
 import agent from '../../agent';
 import {
   APPLY_TAG_FILTER,
-} from '../../constants/actionTypes';
+} from '../../utils/constants/actionTypes';
 
 
 export const applyTagFilter = (tag, page) => {

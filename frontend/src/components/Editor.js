@@ -9,7 +9,7 @@ import {
   ARTICLE_SUBMITTED,
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
-} from '../constants/actionTypes';
+} from '../utils/constants/actionTypes';
 
 const mapStateToProps = state => ({
   ...state.editor

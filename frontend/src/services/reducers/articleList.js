@@ -10,7 +10,7 @@ import {
   PROFILE_PAGE_UNLOADED,
   PROFILE_FAVORITES_PAGE_LOADED,
   PROFILE_FAVORITES_PAGE_UNLOADED
-} from '../constants/actionTypes';
+} from '../../utils/constants/actionTypes';
 
 export default (state = {}, action) => {
 	
@@ -48,7 +48,7 @@ export default (state = {}, action) => {
         ...state,
         articles: action.payload.articles,
         articlesCount: action.payload.articlesCount,
-        currentPage: action.page
+        currentPage: action.payload.page
       };
     case APPLY_TAG_FILTER:
       return {
@@ -68,7 +68,7 @@ export default (state = {}, action) => {
         articles: action.payload.articles || null,
         articlesCount: action.payload.articlesCount || null,
         currentPage: 0,
-        tab: action.tab
+        tab: action.payload.tab
       };
     case HOME_PAGE_UNLOADED:
       return {};

@@ -4,7 +4,7 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
-import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
+import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../utils/constants/actionTypes';
 
 const mapStateToProps = state => ({
   ...state.article,

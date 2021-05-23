@@ -1,7 +1,7 @@
 import agent from '../../agent';
 import {
   HOME_PAGE_LOADED,
-} from '../../constants/actionTypes';
+} from '../../utils/constants/actionTypes';
 
 
 export const loadHomePage = (token) => {

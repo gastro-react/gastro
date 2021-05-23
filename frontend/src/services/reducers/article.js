@@ -3,7 +3,7 @@ import {
   ARTICLE_PAGE_UNLOADED,
   ADD_COMMENT,
   DELETE_COMMENT
-} from '../constants/actionTypes';
+} from '../../utils/constants/actionTypes';
 
 export default (state = {}, action) => {
   switch (action.type) {

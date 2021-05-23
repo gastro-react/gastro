@@ -1,38 +1,32 @@
-
-import ListPagination from './ListPagination';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import ListPagination from './ListPagination';
 import ArticlePreview from "./ArticlePreview/ArticlePreview.jsx";
 
-const ArticleList = props => {
-  if (!props.articles) {
-    return (
-      <div className="article-preview">Loading...</div>
-    );
-  }
+const ArticleWrap = styled.div`
+  font-family: 'Suisse Intl', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+  width: 100%;
+  display: flex;
+  padding: 20px 4px;
+`
 
-  if (props.articles.length === 0) {
-    return (
-      <div className="article-preview">
-        No articles are here... yet.
-      </div>
-    );
-  }
+const ArticleList = () => {
+  const { articles } = useSelector(state => state.articleList)
 
+  if (!articles) return (<ArticleWrap>Loading...</ArticleWrap>);
+  if (articles.length === 0) return (<ArticleWrap> No articles are here... yet.</ArticleWrap>);
+  
   return (
-    <div>
-      {
-        props.articles.map(article => {
-          return (
-            <ArticlePreview article={article} key={article.slug} />
-          );
-        })
+    <>
+      { articles.map(article => (
+        <ArticlePreview article={article} key={article.slug} />))
       }
-
-      <ListPagination
-        pager={props.pager}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
-    </div>
+      <ListPagination />
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import agent from '../../agent';
 import {
   CHANGE_TAB,
-} from '../../constants/actionTypes';
+} from '../../utils/constants/actionTypes';
 
 export const getFeedArticlesOnTabChange = () => {
   return function(dispatch) {

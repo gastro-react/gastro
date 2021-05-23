@@ -7,7 +7,7 @@ import {
   UPDATE_FIELD_AUTH,
   REGISTER,
   REGISTER_PAGE_UNLOADED
-} from '../constants/actionTypes';
+} from '../utils/constants/actionTypes';
 
 const mapStateToProps = state => ({ ...state.auth });
 
