@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components'
 import agent from '../../agent';
+import { applyTagFilter } from '../../services/actions/applyTagFilter';
 
 const TagList = styled.div`
   display: flex;
@@ -30,9 +31,7 @@ const Tag = ({ tag }) => {
   const dispatch = useDispatch();
   const handleClick = e => {
     e.preventDefault();
-    const pager = page => agent.Articles.byTag(tag, page);
-    const payload = () => agent.Articles.byTag(tag);
-    dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload })
+    dispatch(applyTagFilter(tag))
   };
 
   return (

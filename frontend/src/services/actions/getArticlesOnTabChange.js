@@ -6,11 +6,14 @@ import {
 export const getFeedArticlesOnTabChange = () => {
   return function(dispatch) {
     Promise.all([agent.Articles.feed, agent.Articles.feed()])
-      .then(([pager, payload]) => dispatch({ 
+      .then(([pager, articlesArr]) => dispatch({ 
         type: CHANGE_TAB,
-        tab: 'feed',
-        pager,
-        payload
+        payload: {
+          tab: 'feed',
+          pager,
+          articles: articlesArr.articles,
+          articlesCount: articlesArr.articlesCount,
+        }
       }))
       .catch(e => console.log(e))
   };
@@ -18,11 +21,14 @@ export const getFeedArticlesOnTabChange = () => {
 export const getAllArticlesOnTabChange = () => {
   return function(dispatch) {
     Promise.all([agent.Articles.all, agent.Articles.all()])
-    .then(([pager, payload]) => dispatch({ 
+    .then(([pager, articlesArr]) => dispatch({ 
       type: CHANGE_TAB,
-      tab: 'all',
-      pager,
-      payload
+      payload: {
+        tab: 'all',
+        pager,
+        articles: articlesArr.articles,
+        articlesCount: articlesArr.articlesCount,
+      }
     }))
     .catch(e => console.log(e))
   };

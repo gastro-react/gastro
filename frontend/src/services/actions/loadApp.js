@@ -8,6 +8,11 @@ export const loadApp = (token) => {
     if (token) {
       agent.setToken(token);
     }
-    dispatch({ type: APP_LOAD, payload: token ? agent.Auth.current() : null, token, skipTracking: true })
+    dispatch({ 
+      type: APP_LOAD,
+      payload: token ? agent.Auth.current() : null,
+      skipTracking: true,
+      token
+    })
   };
 }

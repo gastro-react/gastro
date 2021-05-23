@@ -14,9 +14,13 @@ export const loadHomePage = (token) => {
     Promise.all([agent.Tags.getAll(), articlesPromise()])
       .then(([tagsObj, pager]) => dispatch({ 
         type: HOME_PAGE_LOADED,
-        tab,
-        pager,
-        tags: tagsObj.tags
+        payload: {
+          tab,
+          pager,
+          tags: tagsObj.tags,
+          articles: pager.articles,
+          articlesCount: pager.articlesCount,
+        }
       }))
       .catch(e => console.log(e))
   }
