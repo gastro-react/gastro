@@ -1,27 +1,29 @@
 
 import ListPagination from './ListPagination';
+import { useSelector } from 'react-redux';
 import React from 'react';
 import ArticlePreview from "./ArticlePreview/ArticlePreview.jsx";
 
-const ArticleList = props => {
-  if (!props.articles) {
+const ArticleList = () => {
+  const { pager, articles, articlesCount, currentPage } = useSelector(state => state.articleList)
+
+  if (!articles) {
     return (
       <div className="article-preview">Loading...</div>
     );
   }
 
-  if (props.articles.length === 0) {
+  if (articles.length === 0) {
     return (
       <div className="article-preview">
         No articles are here... yet.
       </div>
     );
   }
-
   return (
     <div>
       {
-        props.articles.map(article => {
+        articles.map(article => {
           return (
             <ArticlePreview article={article} key={article.slug} />
           );
@@ -29,9 +31,9 @@ const ArticleList = props => {
       }
 
       <ListPagination
-        pager={props.pager}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
+        pager={pager}
+        articlesCount={articlesCount}
+        currentPage={currentPage} />
     </div>
   );
 };

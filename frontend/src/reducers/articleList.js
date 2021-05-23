@@ -68,7 +68,7 @@ export default (state = {}, action) => {
         articles: action.payload.articles || null,
         articlesCount: action.payload.articlesCount || null,
         currentPage: 0,
-        tab: action.tab
+        tab: action.payload.tab
       };
     case HOME_PAGE_UNLOADED:
       return {};
