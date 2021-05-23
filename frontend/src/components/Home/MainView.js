@@ -1,41 +1,59 @@
 import ArticleList from '../ArticleList';
+import styled from 'styled-components';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllArticlesOnTabChange, getFeedArticlesOnTabChange } from '../../services/actions/getArticlesOnTabChange';
 
+const NavItem = styled.li`
+  padding: 0;
+  float: left;
+`
+const NavLink = styled.a`
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: 0 0;
+  color: #aaa;
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  ${props => props.active && 
+  `
+  background: #fff !important;
+  border-bottom: 2px solid #5cb85c !important;
+  color: #5cb85c !important;
+   
+  `}
+`
+
 const YourFeedTab = ({ token, tab, onTabClick }) => (
   token 
     ? (
-      <li className="nav-item">
-        <a  href=""
-            className={ tab === 'feed' ? 'nav-link active' : 'nav-link' }
-            onClick={onTabClick}>
+      <NavItem>
+        <NavLink href="" active={tab === 'feed'} onClick={onTabClick}>
           Your Feed
-        </a>
-      </li>
+        </NavLink>
+      </NavItem>
     )
     : null
 )
 
 const GlobalFeedTab = ({ onTabClick, tab}) => (
-    <li className="nav-item">
-      <a
-        href=""
-        className={ tab === 'all' ? 'nav-link active' : 'nav-link' }
-        onClick={onTabClick}>
+    <NavItem>
+      <NavLink href="" active={ tab === 'all' } onClick={onTabClick}>
         Global Feed
-      </a>
-    </li>
+      </NavLink>
+    </NavItem>
   );
 
 const TagFilterTab = ({ tag }) => (
   tag
   ? (
-    <li className="nav-item">
+    <NavItem>
       <a href="" className="nav-link active">
         <i className="ion-pound"></i> {tag}
       </a>
-    </li>
+    </NavItem>
   )
   : null
 )

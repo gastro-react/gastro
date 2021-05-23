@@ -8,6 +8,10 @@ const SidebarWrap = styled.div`
   padding-left: 15px;
   flex: 0 0 25%;
   max-width: 25%;
+  padding: 16px;
+  height: fit-content;
+  background-color: #f4f4f4;
+  border-radius: 12px;
 `
 const SidebarTitle = styled.p`
   font-family: source sans pro,sans-serif;

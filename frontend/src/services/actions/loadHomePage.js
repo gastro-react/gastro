@@ -10,13 +10,13 @@ export const loadHomePage = (token) => {
     ? agent.Articles.feed
     : agent.Articles.all;
   
-  return function(dispatch) {
+  return (dispatch) => {
     Promise.all([agent.Tags.getAll(), articlesPromise()])
-      .then(res => dispatch({ 
+      .then(([tagsObj, pager]) => dispatch({ 
         type: HOME_PAGE_LOADED,
         tab,
-        pager: articlesPromise,
-        payload: res
+        pager,
+        tags: tagsObj.tags
       }))
       .catch(e => console.log(e))
   }

@@ -9,6 +9,7 @@ import { loadHomePage } from '../../services/actions/loadHomePage';
 
 const HomePage = styled.main`
   max-width: 1440px;
+  margin: 0 auto;
 `;
 const MainContainer = styled.section`
   max-width: 1140px;
