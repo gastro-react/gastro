@@ -86,13 +86,13 @@ const ListPagination = () => {
     if (!range.length) return null;
     return (
       <>
-        <ChevronPage direction="left" page={currentPage - 1} />
+        <ChevronPage direction="left" page={currentPage === startPage ? startPage : currentPage - 1} />
         {
           range.map(page => (
             <PageItem page={page} key={page} />)
             )
           }
-        <ChevronPage direction="right" page={currentPage + 1} />
+        <ChevronPage direction="right" page={currentPage === endPage ? endPage : currentPage + 1} />
       </>
     )
   }
