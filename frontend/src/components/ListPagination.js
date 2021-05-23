@@ -23,14 +23,21 @@ const PageItem = styled.li`
   padding: 12px;
   border-right: 1px solid #e0e0e0;
   border-left: 1px solid #e0e0e0;
+  cursor: pointer;
   ${props => props.active && `
     background: #ff0;
     border-right: 1px solid #ff0;
     border-left: 1px solid #ff0;
+    cursor: inherit;
+    pointer-events: none;
   `}
 `;
 const PageLink = styled.a`
   text-decoration: none;
+  ${props => props.active && `
+    cursor: inherit;
+    pointer-events: none;
+`}
 `;
 
 const ListPagination = () => {
@@ -59,7 +66,7 @@ const ListPagination = () => {
                 onClick={(e) => handlePaginationClick(e, page)}
                 key={`${page}`}>
 
-                <PageLink href="">{page + 1}</PageLink>
+                <PageLink onClick={(e) => {e.preventDefault()}} active={page === currentPage} href="">{page + 1}</PageLink>
 
               </PageItem>
             ))
