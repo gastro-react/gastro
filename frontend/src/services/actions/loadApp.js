@@ -3,8 +3,8 @@ import {
   APP_LOAD,
 } from '../../utils/constants/actionTypes';
 
-export const loadApp = (token) => {
-  return function(dispatch) {
+export const loadApp = token => {
+  return (dispatch) => {
     if (token) {
       agent.setToken(token);
     }

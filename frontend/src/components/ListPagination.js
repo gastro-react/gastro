@@ -1,60 +1,72 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import agent from '../agent';
-import { SET_PAGE } from '../utils/constants/actionTypes';
+import { setPage } from '../services/actions/setPage';
+
+const PaginationNav = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  max-width: 90%;
+  margin: 0 auto;
+`;
+const Pagination = styled.ul`
+  display: flex;
+  padding: 0 20px;
+  list-style: none;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+`
+const PageItem = styled.li`
+  display: inline;
+  padding: 12px;
+  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  ${props => props.active && `
+    background: #ff0;
+    border-right: 1px solid #ff0;
+    border-left: 1px solid #ff0;
+  `}
+`;
+const PageLink = styled.a`
+  text-decoration: none;
+`;
 
 const ListPagination = () => {
   const dispatch = useDispatch();
-  const { pager, articlesCount, currentPage } = useSelector(state => state.articleList)
+  const { articlesCount, currentPage } = useSelector(state => state.articleList)
 
-  const onSetPage = (page, payload) =>{
-    dispatch({ type: SET_PAGE, page, payload })
-  }
-
-  if (articlesCount <= 10) {
-    return null;
-  }
+  if (articlesCount <= 10) return null;
 
   const range = [];
-  for (let i = 0; i < Math.ceil(articlesCount / 10); ++i) {
-    range.push(i);
+    for (let i = 0; i < Math.ceil(articlesCount / 10); i += 1) {
+      range.push(i);
+  }
+  const handlePaginationClick = (e, page) => {
+    e.preventDefault();
+    if (page === currentPage) return;
+    dispatch(setPage(page))
   }
 
-  const setPage = page => {
-    if(pager) {
-      onSetPage(page, pager(page));
-    }else {
-      onSetPage(page, agent.Articles.all(page))
-    }
-  };
-
   return (
-    <nav>
-      <ul className="pagination">
-
+    <PaginationNav>
+      <Pagination>
         {
-          range.map(v => {
-            const isCurrent = v === currentPage;
-            const onClick = e => {
-              e.preventDefault();
-              setPage(v);
-            };
-            return (
-              <li
-                className={ isCurrent ? 'page-item active' : 'page-item' }
-                onClick={onClick}
-                key={v.toString()}>
+          range.map(page => (
+              <PageItem
+                active={page === currentPage}
+                onClick={(e) => handlePaginationClick(e, page)}
+                key={`${page}`}>
 
-                <a className="page-link" href="">{v + 1}</a>
+                <PageLink href="">{page + 1}</PageLink>
 
-              </li>
-            );
-          })
+              </PageItem>
+            ))
         }
 
-      </ul>
-    </nav>
+      </Pagination>
+    </PaginationNav>
   );
 };
 
