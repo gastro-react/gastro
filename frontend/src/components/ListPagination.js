@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { setPage } from '../services/actions/setPage';
+import { ChevronIcon } from '../components/Icons'
 
 const PaginationNav = styled.nav`
   display: flex;
@@ -16,7 +17,7 @@ const Pagination = styled.ul`
   list-style: none;
   overflow: hidden;
   `
-  const PageItem = styled.li`
+const StyledPageItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,28 +56,53 @@ const ListPagination = () => {
     for (let i = 0; i < Math.ceil(articlesCount / 10); i += 1) {
       range.push(i);
   }
+  const startPage = range.shift();
+  const endPage = range.pop();
+
   const handlePaginationClick = (e, page) => {
     e.preventDefault();
     if (page === currentPage) return;
     dispatch(setPage(page))
   }
 
+  const PageItem = ({ page }) => (
+    <StyledPageItem
+      active={currentPage === page}
+      onClick={(e) => handlePaginationClick(e, page)}
+    >
+      <PageLink onClick={(e) => {e.preventDefault()}} active={currentPage === page} href="">{page + 1}</PageLink>
+    </StyledPageItem>
+  )
+  const ChevronPage = ({ page, direction }) => (
+    <StyledPageItem
+      active={false}
+      onClick={(e) => handlePaginationClick(e, page)}
+  >
+    <ChevronIcon direction={direction} />
+  </StyledPageItem>
+  )
+
+  const MiddlePageItems = () => {
+    if (!range.length) return null;
+    return (
+      <>
+        <ChevronPage direction="left" page={currentPage - 1} />
+        {
+          range.map(page => (
+            <PageItem page={page} key={page} />)
+            )
+          }
+        <ChevronPage direction="right" page={currentPage + 1} />
+      </>
+    )
+  }
+
   return (
     <PaginationNav>
       <Pagination>
-        {
-          range.map(page => (
-              <PageItem
-                active={page === currentPage}
-                onClick={(e) => handlePaginationClick(e, page)}
-                key={`${page}`}>
-
-                <PageLink onClick={(e) => {e.preventDefault()}} active={page === currentPage} href="">{page + 1}</PageLink>
-
-              </PageItem>
-            ))
-        }
-
+        <PageItem page={startPage} key={startPage} />
+        <MiddlePageItems />
+        <PageItem page={endPage} key={endPage} />
       </Pagination>
     </PaginationNav>
   );
