@@ -12,22 +12,27 @@ const PaginationNav = styled.nav`
 `;
 const Pagination = styled.ul`
   display: flex;
-  padding: 0 20px;
+  padding: 0;
   list-style: none;
-  border-radius: 20px;
   overflow: hidden;
-  border: 1px solid #e0e0e0;
-`
-const PageItem = styled.li`
-  display: inline;
+  `
+  const PageItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 12px;
-  border-right: 1px solid #e0e0e0;
-  border-left: 1px solid #e0e0e0;
+  border: 1px solid #e0e0e0;
   cursor: pointer;
+  min-width: 64px;
+  &:first-of-type {
+    border-radius: 20px 0 0 20px;
+  }
+  &:last-of-type {
+    border-radius: 0 20px 20px 0;
+  }
   ${props => props.active && `
     background: #ff0;
-    border-right: 1px solid #ff0;
-    border-left: 1px solid #ff0;
+    border: 1px solid #ff0;
     cursor: inherit;
     pointer-events: none;
   `}
