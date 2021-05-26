@@ -8,6 +8,7 @@ import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../utils/constant
 import styled from 'styled-components';
 import ArticleActions from "./ArticleActions";
 import imagePots from './pots.jpg'
+import {getAllArticleInfo} from "../../services/actions/getAllArticleInfo";
 
 
 const ArticleWrap = styled.div`
@@ -91,10 +92,7 @@ const  Article = props => {
 
 
   useEffect(() => {
-    dispatch({ type: ARTICLE_PAGE_LOADED, payload: Promise.all([
-        agent.Articles.get(props.match.params.id),
-        agent.Comments.forArticle(props.match.params.id)
-      ]) })
+    dispatch(getAllArticleInfo(props.match.params.id));
     return  dispatch({ type: ARTICLE_PAGE_UNLOADED });
   }, [])
 
