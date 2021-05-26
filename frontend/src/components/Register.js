@@ -59,12 +59,9 @@ class Register extends React.Component {
                   Have an account?
                 </Link>
               </p>
-
               <ListErrors errors={this.props.errors} />
-
               <form onSubmit={this.submitForm(username, email, password)}>
                 <fieldset>
-
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
@@ -73,7 +70,6 @@ class Register extends React.Component {
                       value={this.props.username}
                       onChange={this.changeUsername} />
                   </fieldset>
-
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
@@ -82,7 +78,6 @@ class Register extends React.Component {
                       value={this.props.email}
                       onChange={this.changeEmail} />
                   </fieldset>
-
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
@@ -91,18 +86,15 @@ class Register extends React.Component {
                       value={this.props.password}
                       onChange={this.changePassword} />
                   </fieldset>
-
                   <button
                     className="btn btn-lg btn-primary pull-xs-right"
                     type="submit"
                     disabled={this.props.inProgress}>
                     Sign up
                   </button>
-
                 </fieldset>
               </form>
             </div>
-
           </div>
         </div>
       </div>
