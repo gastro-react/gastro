@@ -16,7 +16,7 @@ export const loadHomePage = (token) => {
       .then(([tagsObj, pager]) => dispatch({
         type: HOME_PAGE_LOADED,
         payload: {
-          tab,
+          tab:'all',
           pager,
           tags: tagsObj.tags,
           articles: pager.articles,
