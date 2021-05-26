@@ -30,11 +30,11 @@ const NavItem = styled.li`
   color: #aaa;
   background: transparent;
 
-  ${props => props.active === true 
+  ${props => props.active === true
     ?
     `
       border-bottom: 2px solid #000;
-      color: #000; 
+      color: #000;
     `
     : ''
   }
@@ -57,7 +57,7 @@ const NavLink = styled.a`
   }
 `
 const YourFeedTab = ({ token, active, onTabClick }) => (
-  token 
+  token
   ? (
     <NavItem active={active} onClick={onTabClick}>
       <NavLink href="" onClick={()=> {}} >Your Feed</NavLink>
@@ -71,7 +71,7 @@ const GlobalFeedTab = ({ onTabClick, active}) => (
     <NavLink href="" onClick={()=> {}} >Global Feed</NavLink>
   </NavItem>
 );
-  
+
 const TagFilterTab = ({ tag }) => (
   tag
   ? (
@@ -99,8 +99,8 @@ const MainView = () => {
     <StyledMainView>
       <Navigation>
         <TabsList>
+					<GlobalFeedTab active={tab === 'all'} onTabClick={e => handleTabClick(e, 'all')} />
           <YourFeedTab active={tab === 'feed'} token={token} onTabClick={e => handleTabClick(e, 'feed')} />
-          <GlobalFeedTab active={tab === 'all'} onTabClick={e => handleTabClick(e, 'all')} />
           <TagFilterTab tag={tag} />
         </TabsList>
       </Navigation>
