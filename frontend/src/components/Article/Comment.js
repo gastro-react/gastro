@@ -1,34 +1,45 @@
 import DeleteButton from './DeleteButton';
-import { Link } from 'react-router-dom';
 import React from 'react';
+import {useSelector} from "react-redux";
+import ArticleMeta from "./ArticleMeta";
+import styled    from "styled-components";
+
+
+const Card = styled.div`
+border: 1px solid #F4F4F6;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 24px;
+  margin-bottom: 32px;
+`
+
+const CardHeader=styled.div`
+display: flex;
+  justify-content: space-between;
+
+`
+
+const CommentContent=styled.p`
+color: #62626A;
+  line-height: 24px;
+  margin: 24px 0 0;
+`
 
 const Comment = props => {
+
+    const {currentUser} = useSelector( state => state.common);
+    const {slug} = useSelector(state => state.article.article)
   const comment = props.comment;
-  const show = props.currentUser &&
-    props.currentUser.username === comment.author.username;
+  const show = currentUser &&
+    currentUser.username === comment.author.username;
   return (
-    <div className="card">
-      <div className="card-block">
-        <p className="card-text">{comment.body}</p>
-      </div>
-      <div className="card-footer">
-        <Link
-          to={`/@${comment.author.username}`}
-          className="comment-author">
-          <img src={comment.author.image} className="comment-author-img" alt={comment.author.username} />
-        </Link>
-        &nbsp;
-        <Link
-          to={`/@${comment.author.username}`}
-          className="comment-author">
-          {comment.author.username}
-        </Link>
-        <span className="date-posted">
-          {new Date(comment.createdAt).toDateString()}
-        </span>
-        <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
-      </div>
-    </div>
+    <Card >
+        <CardHeader>
+            <ArticleMeta author={comment.author} createdAt={comment.createdAt} theme='light'/>
+            <DeleteButton show={show} slug={slug} commentId={comment.id} />
+        </CardHeader>
+        <CommentContent>{comment.body}</CommentContent>
+    </Card >
   );
 };
 

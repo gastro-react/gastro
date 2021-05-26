@@ -1,16 +1,19 @@
 import Comment from './Comment';
 import React from 'react';
+import {useSelector} from "react-redux";
 
-const CommentList = props => {
+const CommentList = () => {
+
+  const {comments} = useSelector( state => state.article);
   return (
     <div>
       {
-        props.comments.map(comment => {
+        comments.map(comment => {
           return (
             <Comment
               comment={comment}
-              currentUser={props.currentUser}
-              slug={props.slug}
+              // currentUser={props.currentUser}
+              // slug={props.slug}
               key={comment.id} />
           );
         })
