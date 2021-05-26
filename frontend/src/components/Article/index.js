@@ -1,98 +1,150 @@
 import ArticleMeta from './ArticleMeta';
 import CommentContainer from './CommentContainer';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import agent from '../../agent';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import marked from 'marked';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../utils/constants/actionTypes';
+import styled from 'styled-components';
+import ArticleActions from "./ArticleActions";
+import imagePots from './pots.jpg'
 
-const mapStateToProps = state => ({
-  ...state.article,
-  currentUser: state.common.currentUser
-});
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload =>
-    dispatch({ type: ARTICLE_PAGE_LOADED, payload }),
-  onUnload: () =>
-    dispatch({ type: ARTICLE_PAGE_UNLOADED })
-});
+const ArticleWrap = styled.div`
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 16px;
+  font-family: "Suisse Intl", sans-serif;
+  font-style: normal;
+  font-weight: 450;
+`
+const Banner = styled.div` 
+  color: #fff;
+  background: #1C1C22;
+`
 
-class Article extends React.Component {
-  componentWillMount() {
-    this.props.onLoad(Promise.all([
-      agent.Articles.get(this.props.match.params.id),
-      agent.Comments.forArticle(this.props.match.params.id)
-    ]));
-  }
+const MetaContainer = styled.div`
+  margin: 0 auto;
+  padding: 32px 0 32px 16px;
+  box-sizing: border-box;
+  display: flex;
+  max-width: 1140px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+`
 
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
+const ArticleTitle=styled.h1`
+  font-family: "Spectral", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 40px;
+  margin: 0;
+  padding: 16px 0;
+  color: #0A0A0B;
+  `
+const ArticleImage=styled.img`
+width: 100%;
+  height: auto;
+`
+const ArticleContent=styled.div`
+box-sizing: border-box;
+  margin: 0;
+  padding: 16px 0;
+  color: #0A0A0B;
+`
+const TagList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: center;
+`
+const TagListItem = styled.li`
+  background: #F4F4F6;
+  border: 1px solid #E0E0E0;
+  border-radius: 100px;
+  margin: 0 4px;
+  padding: 4px 8px;
+`
+const CommentsWrap=styled.section`
+margin: 0 auto;
+  padding: 0;
+  max-width: 728px;
+`
 
-  render() {
-    if (!this.props.article) {
-      return null;
+
+const  Article = props => {
+
+  const {article} = useSelector(state => state.article);
+  const {currentUser} = useSelector(state => state.common)
+
+  const dispatch=useDispatch();
+
+  const [markup, setMarkup] = useState({__html: marked('')})
+  const [canModify, setCanModify] = useState(false)
+
+
+  useEffect(() => {
+    dispatch({ type: ARTICLE_PAGE_LOADED, payload: Promise.all([
+        agent.Articles.get(props.match.params.id),
+        agent.Comments.forArticle(props.match.params.id)
+      ]) })
+    return  dispatch({ type: ARTICLE_PAGE_UNLOADED });
+  }, [])
+
+  useEffect(() => {
+    if (article) {
+      setMarkup({__html: marked(article.body, {sanitize: true})});
+      setCanModify(currentUser &&
+          currentUser.username === article.author.username);
     }
+  },[article])
 
-    const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
-    const canModify = this.props.currentUser &&
-      this.props.currentUser.username === this.props.article.author.username;
-    return (
-      <div className="article-page">
-
-        <div className="banner">
-          <div className="container">
-
-            <h1>{this.props.article.title}</h1>
-            <ArticleMeta
-              article={this.props.article}
-              canModify={canModify} />
-
-          </div>
-        </div>
-
-
-        <div className="container page">
-
-          <div className="row article-content">
-            <div className="col-xs-12">
-
-              <div dangerouslySetInnerHTML={markup}></div>
-
-              <ul className="tag-list">
-                {
-                  this.props.article.tagList.map(tag => {
-                    return (
-                      <li
-                        className="tag-default tag-pill tag-outline"
-                        key={tag}>
-                        {tag}
-                      </li>
-                    );
-                  })
-                }
-              </ul>
-
-            </div>
-          </div>
-
-          <hr />
-
-          <div className="article-actions">
-          </div>
-
-          <div className="row">
-            <CommentContainer
-              comments={this.props.comments || []}
-              errors={this.props.commentErrors}
-              slug={this.props.match.params.id}
-              currentUser={this.props.currentUser} />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  return (
+      !article ?
+          null
+          :
+          <>
+            <Banner>
+              <MetaContainer>
+                <ArticleMeta author={article.author} createdAt={article.createdAt} theme='dark'/>
+                <ArticleActions canModify={canModify} article={article} />
+              </MetaContainer>
+            </Banner>
+            <ArticleWrap >
+              <ArticleTitle>{article.title}</ArticleTitle>
+              <ArticleImage src={imagePots} alt={article.title}/>
+              <ArticleContent>
+                  <div dangerouslySetInnerHTML={markup}/>
+                  <TagList>
+                    {
+                      article.tagList.map(tag => {
+                        return (
+                            <TagListItem
+                                key={tag}>
+                              {tag}
+                            </TagListItem>
+                        );
+                      })
+                    }
+                  </TagList>
+              </ArticleContent>
+              <CommentsWrap>
+                <CommentContainer
+                    comments={props.comments || []}
+                    errors={props.commentErrors}
+                    slug={props.match.params.id}
+                    currentUser={currentUser} />
+              </CommentsWrap>
+            </ArticleWrap>
+          </>
+  );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Article);
+export default Article;

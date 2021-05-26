@@ -1,4 +1,4 @@
-import agent from '../../agent';
+ import agent from '../../agent';
 import {
   CHANGE_TAB,
 } from '../../utils/constants/actionTypes';
@@ -6,7 +6,7 @@ import {
 export const getFeedArticlesOnTabChange = () => {
   return function(dispatch) {
     Promise.all([agent.Articles.feed, agent.Articles.feed()])
-      .then(([pager, articlesArr]) => dispatch({ 
+      .then(([pager, articlesArr]) => dispatch({
         type: CHANGE_TAB,
         payload: {
           tab: 'feed',
@@ -21,7 +21,7 @@ export const getFeedArticlesOnTabChange = () => {
 export const getAllArticlesOnTabChange = () => {
   return function(dispatch) {
     Promise.all([agent.Articles.all, agent.Articles.all()])
-    .then(([pager, articlesArr]) => dispatch({ 
+    .then(([pager, articlesArr]) => dispatch({
       type: CHANGE_TAB,
       payload: {
         tab: 'all',

@@ -1,27 +1,31 @@
 import React from 'react';
 import agent from '../../agent';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { DELETE_COMMENT } from '../../utils/constants/actionTypes';
+import {TrashIcon} from "../Icons";
+import styled from "styled-components"
 
-const mapDispatchToProps = dispatch => ({
-  onClick: (payload, commentId) =>
-    dispatch({ type: DELETE_COMMENT, payload, commentId })
-});
+const ButtonWrap=styled.span`
+cursor: pointer;
+`
 
 const DeleteButton = props => {
+  const dispatch = useDispatch();
+
   const del = () => {
     const payload = agent.Comments.delete(props.slug, props.commentId);
-    props.onClick(payload, props.commentId);
+    const commentId = props.commentId;
+    dispatch({ type: DELETE_COMMENT, payload, commentId })
   };
 
   if (props.show) {
     return (
-      <span className="mod-options">
-        <i className="ion-trash-a" onClick={del}></i>
-      </span>
+      <ButtonWrap onClick={del}>
+        <TrashIcon  color={'#F53D5C'} />
+       </ButtonWrap>
     );
   }
   return null;
 };
 
-export default connect(() => ({}), mapDispatchToProps)(DeleteButton);
+export default DeleteButton;
