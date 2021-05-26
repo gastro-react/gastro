@@ -12,8 +12,6 @@ const CommentList = () => {
           return (
             <Comment
               comment={comment}
-              // currentUser={props.currentUser}
-              // slug={props.slug}
               key={comment.id} />
           );
         })
