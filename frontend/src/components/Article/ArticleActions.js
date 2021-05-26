@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import agent from '../../agent';
-import { connect, useDispatch } from 'react-redux';
-import { DELETE_ARTICLE } from '../../utils/constants/actionTypes';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {EditIcon, TrashIcon} from "../Icons";
+import {deleteArticle} from "../../services/actions/deleteArticle";
 
 const Actions= styled.span`
   display: flex;
@@ -48,26 +47,17 @@ const DeleteButton=styled.button`
   }
 `
 
-
-
-// const mapDispatchToProps = dispatch => ({
-//   onClickDelete: payload =>
-//     dispatch({ type: DELETE_ARTICLE, payload })
-// });
-
 const ArticleActions = props => {
   const dispatch= useDispatch();
   const article = props.article;
-  const del = () => {
-      agent.Articles.del(article.slug).then(payload =>{dispatch({ type: DELETE_ARTICLE, payload })});
-  };
   if (props.canModify) {
     return (
       <Actions>
          <LinkEdit to={`/editor/${article.slug}`}>
           <EditIcon/> Edit Article
         </LinkEdit>
-        <DeleteButton  onClick={del}>
+        <DeleteButton  onClick={() =>
+            dispatch(deleteArticle(article.slug))}>
           <TrashIcon color={'#F53D5C'}/> Delete Article
         </DeleteButton>
       </Actions>

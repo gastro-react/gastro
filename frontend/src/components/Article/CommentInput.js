@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import agent from '../../agent';
 import { useSelector, useDispatch} from 'react-redux';
-import { ADD_COMMENT } from '../../utils/constants/actionTypes';
 import ArticleMeta from "./ArticleMeta";
 import styled from 'styled-components'
+import {createComment} from "../../services/actions/createComment";
 
 
 const Form=styled.form`
@@ -65,16 +64,14 @@ const CommentInput = () => {
   const dispatch = useDispatch();
 
 
-  const createComment = (ev)  => {
+  const handleSubmit = (ev)  => {
     ev.preventDefault();
-    const payload = agent.Comments.create(slug,
-        {body: body});
+    dispatch(createComment(slug,body));
     setBody( '');
-    dispatch({ type: ADD_COMMENT, payload });
   }
 
     return (
-      <Form onSubmit={createComment}>
+      <Form onSubmit={handleSubmit}>
           <Textarea
             placeholder="Write a comment..."
             value={body}

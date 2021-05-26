@@ -1,10 +1,10 @@
 import ArticleMeta from './ArticleMeta';
 import CommentContainer from './CommentContainer';
 import React, {useEffect, useState} from 'react';
-import agent from '../../agent';
 import { useSelector, useDispatch } from 'react-redux';
+import {useHistory}  from 'react-router-dom';
 import marked from 'marked';
-import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../utils/constants/actionTypes';
+import { REDIRECT, ARTICLE_PAGE_UNLOADED } from '../../utils/constants/actionTypes';
 import styled from 'styled-components';
 import ArticleActions from "./ArticleActions";
 import imagePots from './pots.jpg'
@@ -25,7 +25,6 @@ const Banner = styled.div`
   color: #fff;
   background: #1C1C22;
 `
-
 const MetaContainer = styled.div`
   margin: 0 auto;
   padding: 32px 0 32px 16px;
@@ -84,11 +83,20 @@ const  Article = props => {
 
   const {article} = useSelector(state => state.article);
   const {currentUser} = useSelector(state => state.common)
-
-  const dispatch=useDispatch();
+  const {redirectTo } = useSelector(state => state.common)
+  const dispatch = useDispatch();
+  const history =  useHistory()
 
   const [markup, setMarkup] = useState({__html: marked('')})
   const [canModify, setCanModify] = useState(false)
+
+
+    useEffect(() => {
+        if (redirectTo) {
+            history.push(redirectTo);
+            dispatch({type: REDIRECT})
+        }
+    }, [redirectTo])
 
 
   useEffect(() => {
