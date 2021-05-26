@@ -38,7 +38,6 @@ function Settings () {
                 onClick={onClickLogout}>
                 Or click here to logout.
               </button>
-
             </div>
           </div>
         </div>
