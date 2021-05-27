@@ -7,6 +7,7 @@ import {
 	REGISTER,
 	REGISTER_PAGE_UNLOADED, LOGIN_PAGE_UNLOADED,
 } from '../utils/constants/actionTypes';
+import {register} from '../services/actions/register';
 
 function Register () {
 	const [email, setEmail] = useState('')
@@ -20,7 +21,7 @@ function Register () {
 	const changeUsername = ev => setUsername(ev.target.value);
 	const submitForm = (username, email, password) => ev => {
       ev.preventDefault();
-		dispatch({ type: REGISTER, payload: agent.Auth.register(username, email, password) })
+		dispatch(register(username, email, password) )
 	}
  
 	useEffect(()=>{

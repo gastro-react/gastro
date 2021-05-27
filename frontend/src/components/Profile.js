@@ -48,7 +48,7 @@ const FollowUserButton = props => {
     <button
       className={classes}
       onClick={handleClick}>
-      <i className="ion-plus-round"></i>
+      <i className='ion-plus-round'/>
       &nbsp;
       {props.user.following ? 'Unfollow' : 'Follow'} {props.user.username}
     </button>

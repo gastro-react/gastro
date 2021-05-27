@@ -7,18 +7,19 @@ import {
   LOGIN,
   LOGIN_PAGE_UNLOADED
 } from '../utils/constants/actionTypes';
+import {login} from '../services/actions/login'
 
 function Login () {
 	
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const dispatch = useDispatch()
-	const auth =useSelector(state=> state.auth)
+	const auth = useSelector(state=> state.auth)
 	const changeEmail = ev => setEmail(ev.target.value);
 	const changePassword = ev => setPassword(ev.target.value);
 	const submitForm = (email, password) => ev => {
 			ev.preventDefault ();
-		dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) })
+		dispatch( login(email, password) )
 		}
 		
 		useEffect(()=>{
