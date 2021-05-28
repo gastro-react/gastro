@@ -162,7 +162,7 @@ router.get('/:article', auth.optional, function(req, res, next) {
 });
 
 // update article
-router.put('/:article', auth.required,
+router.put('/:article', auth.required, upload,
 	function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if(req.article.author._id.toString() === req.payload.id.toString()){
@@ -180,6 +180,10 @@ router.put('/:article', auth.required,
 
       if(typeof req.body.article.tagList !== 'undefined'){
         req.article.tagList = req.body.article.tagList
+      }
+
+      if (req.file) {
+        req.article.image = `uploads/${req.file.filename}`
       }
 
       req.article.save().then(function(article){

@@ -28,9 +28,19 @@ const requests = {
     superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
   put: (url, body) =>
     superagent
-      .put(`${API_ROOT}${url}`, body)
+      .put(`${API_ROOT}${url}`)
       .use(tokenPlugin)
       .then(responseBody),
+  put_article: (url, { article }) =>
+      superagent
+          .put(`${API_ROOT}${url}`)
+          .field('title', article.title)
+          .field('description', article.description)
+          .field('body', article.body)
+          .field('tagList', article.tagList)
+          .attach('image', article.image)
+          .use(tokenPlugin)
+          .then(responseBody),
   post: (url, body) =>
       superagent
           .post(`${API_ROOT}${url}`, body)
@@ -77,7 +87,7 @@ const Articles = {
   get: (slug) => requests.get(`/articles/${slug}`),
   unfavorite: (slug) => requests.del(`/articles/${slug}/favorite`),
   update: (article) =>
-    requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
+    requests.put_article(`/articles/${article.slug}`, { article: omitSlug(article) }),
   create: (article) => requests.post_article('/articles', { article }),
 }
 
