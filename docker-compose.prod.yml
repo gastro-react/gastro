@@ -18,6 +18,8 @@ services:
     image: rozarioagro/backend-pickledbananas:latest
     restart: always
     command: sh -c "npm i && npm start"
+    volumes:
+      - public_volume:/usr/src/app/public/uploads
     env_file:
       - ./.env.prod
     depends_on:
@@ -38,3 +40,4 @@ volumes:
   mongo-data:
   static_volume:
   media_volume:
+  public_volume:
