@@ -8,3 +8,4 @@ export const settingsSave = (user) => {
       .catch((e) => console.log(e))
   }
 }
+``
