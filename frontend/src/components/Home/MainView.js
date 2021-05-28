@@ -1,8 +1,11 @@
-import ArticleList from '../ArticleList';
-import styled from 'styled-components';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllArticlesOnTabChange, getFeedArticlesOnTabChange } from '../../services/actions/getArticlesOnTabChange';
+import ArticleList from '../ArticleList'
+import styled from 'styled-components'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  getAllArticlesOnTabChange,
+  getFeedArticlesOnTabChange,
+} from '../../services/actions/getArticlesOnTabChange'
 
 const StyledMainView = styled.div`
   position: relative;
@@ -30,15 +33,14 @@ const NavItem = styled.li`
   color: #aaa;
   background: transparent;
 
-  ${props => props.active === true
-    ?
-    `
+  ${(props) =>
+    props.active === true
+      ? `
       border-bottom: 2px solid #000;
       color: #000;
     `
-    : ''
-  }
-  `
+      : ''}
+`
 const NavLink = styled.a`
   font-family: 'Suisse Intl', sans-serif;
   font-weight: 500;
@@ -47,66 +49,77 @@ const NavLink = styled.a`
   color: inherit;
   display: block;
   text-decoration: none;
-  transition: transform .2s linear;
-  
+  transition: transform 0.2s linear;
+
   &:hover {
     transform: scale(1.1);
   }
-  &:active, &:visited {
+  &:active,
+  &:visited {
     color: inherit;
   }
 `
-const YourFeedTab = ({ token, active, onTabClick }) => (
-  token
-  ? (
+const YourFeedTab = ({ token, active, onTabClick }) =>
+  token ? (
     <NavItem active={active} onClick={onTabClick}>
-      <NavLink href="" onClick={()=> {}} >Your Feed</NavLink>
+      <NavLink href="" onClick={() => {}}>
+        Your Feed
+      </NavLink>
     </NavItem>
-    )
-    : null
-    )
-    
-const GlobalFeedTab = ({ onTabClick, active}) => (
-  <NavItem active={active} onClick={onTabClick}>
-    <NavLink href="" onClick={()=> {}} >Global Feed</NavLink>
-  </NavItem>
-);
+  ) : null
 
-const TagFilterTab = ({ tag }) => (
-  tag
-  ? (
+const GlobalFeedTab = ({ onTabClick, active }) => (
+  <NavItem active={active} onClick={onTabClick}>
+    <NavLink href="" onClick={() => {}}>
+      Global Feed
+    </NavLink>
+  </NavItem>
+)
+
+const TagFilterTab = ({ tag }) =>
+  tag ? (
     <NavItem active={true}>
-      <NavLink href="" onClick={(e)=> {e.preventDefault()}}>
+      <NavLink
+        href=""
+        onClick={(e) => {
+          e.preventDefault()
+        }}
+      >
         {'# ' + tag}
       </NavLink>
     </NavItem>
-  )
-  : null
-  )
-  
+  ) : null
+
 const MainView = () => {
-  const { token } = useSelector(state => state.common)
-  const { tag, tab } = useSelector(state => state.articleList)
-  const dispatch = useDispatch();
-  
+  const { token } = useSelector((state) => state.common)
+  const { tag, tab } = useSelector((state) => state.articleList)
+  const dispatch = useDispatch()
+
   const handleTabClick = (e, type) => {
-    e.preventDefault();
-    if (type === 'feed') dispatch(getFeedArticlesOnTabChange());
-    if (type === 'all') dispatch(getAllArticlesOnTabChange());
+    e.preventDefault()
+    if (type === 'feed') dispatch(getFeedArticlesOnTabChange())
+    if (type === 'all') dispatch(getAllArticlesOnTabChange())
   }
 
   return (
     <StyledMainView>
       <Navigation>
         <TabsList>
-					<GlobalFeedTab active={tab === 'all'} onTabClick={e => handleTabClick(e, 'all')} />
-          <YourFeedTab active={tab === 'feed'} token={token} onTabClick={e => handleTabClick(e, 'feed')} />
+          <GlobalFeedTab
+            active={tab === 'all'}
+            onTabClick={(e) => handleTabClick(e, 'all')}
+          />
+          <YourFeedTab
+            active={tab === 'feed'}
+            token={token}
+            onTabClick={(e) => handleTabClick(e, 'feed')}
+          />
           <TagFilterTab tag={tag} />
         </TabsList>
       </Navigation>
       <ArticleList />
     </StyledMainView>
-  );
-};
+  )
+}
 
-export default MainView;
+export default MainView

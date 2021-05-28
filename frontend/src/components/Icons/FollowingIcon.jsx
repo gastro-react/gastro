@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Svg = styled.svg`
-  width: ${props => props.width || '24px'};
-  height: ${props => props.height || '24px'};
+  width: ${(props) => props.width || '24px'};
+  height: ${(props) => props.height || '24px'};
 `
 
 const FollowingIcon = ({ width, height, color = '#0a0a0b' }) => (
@@ -15,14 +15,20 @@ const FollowingIcon = ({ width, height, color = '#0a0a0b' }) => (
     height={height}
     fill="none"
   >
-    <path d="M20 6L9 17L4 12" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path
+      d="M20 6L9 17L4 12"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </Svg>
 )
 
 FollowingIcon.propTypes = {
   color: PropTypes.string,
   width: PropTypes.string,
-  height: PropTypes.string
+  height: PropTypes.string,
 }
 
-export default FollowingIcon;
+export default FollowingIcon

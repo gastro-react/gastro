@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Tags from './Tags';
+import styled from 'styled-components'
+import Tags from './Tags'
 
 const SidebarWrap = styled.div`
   position: relative;
@@ -14,7 +14,7 @@ const SidebarWrap = styled.div`
   border-radius: 12px;
 `
 const SidebarTitle = styled.p`
-  font-family: source sans pro,sans-serif;
+  font-family: source sans pro, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   color: #373a3c;
@@ -25,6 +25,6 @@ const Sidebar = () => (
     <SidebarTitle>Popular Tags</SidebarTitle>
     <Tags />
   </SidebarWrap>
-);
-  
-export default Sidebar;
+)
+
+export default Sidebar

@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { store, history} from './store';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { store, history } from './store'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 // import { ConnectedRouter } from 'react-router-redux';
-import { ConnectedRouter } from 'connected-react-router';
-import App from './components/App';
+import { ConnectedRouter } from 'connected-react-router'
+import App from './components/App'
 
-ReactDOM.render((
+ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <ConnectedRouter history={history}>
@@ -16,6 +16,7 @@ ReactDOM.render((
         </Switch>
       </ConnectedRouter>
     </BrowserRouter>
-  </Provider>
+  </Provider>,
 
-), document.getElementById('root'));
+  document.getElementById('root')
+)

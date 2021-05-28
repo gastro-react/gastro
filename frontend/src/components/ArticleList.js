@@ -1,8 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import ListPagination from './ListPagination';
-import ArticlePreview from "./ArticlePreview/ArticlePreview.jsx";
+import React from 'react'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
+import ListPagination from './ListPagination'
+import ArticlePreview from './ArticlePreview/ArticlePreview.jsx'
 
 const ArticleWrap = styled.div`
   font-family: 'Suisse Intl', sans-serif;
@@ -15,19 +15,20 @@ const ArticleWrap = styled.div`
 `
 
 const ArticleList = () => {
-  const { articles } = useSelector(state => state.articleList)
+  const { articles } = useSelector((state) => state.articleList)
 
-  if (!articles) return (<ArticleWrap>Loading...</ArticleWrap>);
-  if (articles.length === 0) return (<ArticleWrap> No articles are here... yet.</ArticleWrap>);
-  
+  if (!articles) return <ArticleWrap>Loading...</ArticleWrap>
+  if (articles.length === 0)
+    return <ArticleWrap> No articles are here... yet.</ArticleWrap>
+
   return (
     <>
-      { articles.map(article => (
-        <ArticlePreview article={article} key={article.slug} />))
-      }
+      {articles.map((article) => (
+        <ArticlePreview article={article} key={article.slug} />
+      ))}
       <ListPagination />
     </>
-  );
-};
+  )
+}
 
-export default ArticleList;
+export default ArticleList

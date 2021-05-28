@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Svg = styled.svg`
-  width: ${props => props.width || '24px'};
-  height: ${props => props.height || '24px'};
+  width: ${(props) => props.width || '24px'};
+  height: ${(props) => props.height || '24px'};
 `
 
 const UnfollowIcon = ({ width, height, color = '#0a0a0b' }) => (
@@ -14,14 +14,20 @@ const UnfollowIcon = ({ width, height, color = '#0a0a0b' }) => (
     width={width}
     height={height}
   >
-    <path d="M5 12H19" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path
+      d="M5 12H19"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </Svg>
 )
 
 UnfollowIcon.propTypes = {
   color: PropTypes.string,
   width: PropTypes.string,
-  height: PropTypes.string
+  height: PropTypes.string,
 }
 
-export default UnfollowIcon;
+export default UnfollowIcon
