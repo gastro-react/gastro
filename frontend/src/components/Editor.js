@@ -36,6 +36,10 @@ class Editor extends React.Component {
     this.changeBody = updateFieldEvent('body')
     this.changeTagInput = updateFieldEvent('tagInput')
 
+    const updateFieldFileEvent =
+        key => ev => this.props.onUpdateField(key, ev.target.files[0]);
+    this.changeImage = updateFieldFileEvent('image');
+
     this.watchForEnter = (ev) => {
       if (ev.keyCode === 13) {
         ev.preventDefault()
@@ -52,11 +56,14 @@ class Editor extends React.Component {
       const article = {
         title: this.props.title,
         description: this.props.description,
+        image: this.props.image,
         body: this.props.body,
         tagList: this.props.tagList,
       }
 
       const slug = { slug: this.props.articleSlug }
+
+      console.log(article)
       const promise = this.props.articleSlug
         ? agent.Articles.update(Object.assign(article, slug))
         : agent.Articles.create(article)
@@ -106,6 +113,13 @@ class Editor extends React.Component {
                       value={this.props.title || ''}
                       onChange={this.changeTitle}
                     />
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                    <input
+                        className="form-control form-control-lg"
+                        type="file"
+                        onChange={this.changeImage} />
                   </fieldset>
 
                   <fieldset className="form-group">

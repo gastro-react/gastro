@@ -5,6 +5,20 @@ const Comment = mongoose.model('Comment');
 const User = mongoose.model('User');
 var auth = require('../auth');
 
+multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'public/uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+let upload = multer({ storage: storage }).single('image');
+
+
 // Preload article objects on routes with ':article'
 router.param('article', function(req, res, next, slug) {
   Article.findOne({ slug: slug})
@@ -119,12 +133,13 @@ router.get('/feed', auth.required, function(req, res, next) {
   });
 });
 
-router.post('/', auth.required, function(req, res, next) {
+router.post('/', auth.required, upload, function(req, res, next) {
   User.findById(req.payload.id)
     .then((user) => {
       if (!user) return res.sendStatus(401);
 
-      const article = new Article({...req.body.article, author: user});
+      const article = new Article({...req.body, author: user, image: null});
+      article.image = req.file ? `uploads/${req.file.filename}` : null
 
       return article.save().then(function(){
         console.log(article.author);
