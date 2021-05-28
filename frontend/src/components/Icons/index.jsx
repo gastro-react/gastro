@@ -29,5 +29,5 @@ export {
   ThumbsIcon,
   FollowingIcon,
   LogoutIcon,
-  LoginIcon
+  LoginIcon,
 }

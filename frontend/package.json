@@ -6,6 +6,10 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^6.0.0",
+    "prettier": "^2.2.1",
     "react-scripts": "4.0.3"
   },
   "dependencies": {
@@ -32,7 +36,13 @@
     "start": "cross-env PORT=4100 react-scripts start -FAST_REFRESH=true",
     "build": "react-scripts build",
     "test": "cross-env PORT=4100 react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format"
+    }
   },
   "browserslist": {
     "production": [

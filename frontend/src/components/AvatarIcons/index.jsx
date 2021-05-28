@@ -4,10 +4,4 @@ import InvadersIcon from './InvadersIcon'
 import CookIcon from './CookIcon'
 import DeveloperIcon from './DeveloperIcon'
 
-export {
-  SmileIcon,
-  AlienIcon,
-  InvadersIcon,
-  CookIcon,
-  DeveloperIcon
-}
+export { SmileIcon, AlienIcon, InvadersIcon, CookIcon, DeveloperIcon }

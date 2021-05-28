@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 const Section = styled.section`
@@ -19,7 +19,7 @@ const Title = styled.h1`
   font-size: 64px;
   line-height: 64px;
   text-align: center;
-  color: #FFFF00;
+  color: #ffff00;
   margin-bottom: 8px;
 `
 const SubTitle = styled.p`
@@ -32,11 +32,10 @@ const SubTitle = styled.p`
   color: #fff;
 `
 
-
 const Banner = () => {
-  const { appName } = useSelector(state => state.common)
-  const subtitle = "the new experience is cooked here..."; // delete hardcode!!
-  
+  const { appName } = useSelector((state) => state.common)
+  const subtitle = 'the new experience is cooked here...' // delete hardcode!!
+
   return (
     <Section>
       <StyledBanner>
@@ -47,5 +46,4 @@ const Banner = () => {
   )
 }
 
-
-export default Banner;
+export default Banner

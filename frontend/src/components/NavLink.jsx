@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const StyledLink = styled(Link)`
   font-family: 'Suisse Intl', sans-serif;
@@ -17,7 +17,7 @@ const StyledLink = styled(Link)`
   gap: 8px;
   justify-content: space-between;
   align-items: center;
-  
+
   &:hover {
     text-decoration: none;
     cursor: pointer;
@@ -36,7 +36,7 @@ const NavLink = ({ link, text, icon }) => {
       {icon}
       {text}
     </StyledLink>
-  );
+  )
 }
 
 NavLink.propTypes = {
@@ -45,4 +45,4 @@ NavLink.propTypes = {
   icon: PropTypes.node,
 }
 
-export default NavLink;
+export default NavLink

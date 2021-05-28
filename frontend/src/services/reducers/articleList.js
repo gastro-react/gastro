@@ -9,47 +9,46 @@ import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED,
   PROFILE_FAVORITES_PAGE_LOADED,
-  PROFILE_FAVORITES_PAGE_UNLOADED
-} from '../../utils/constants/actionTypes';
+  PROFILE_FAVORITES_PAGE_UNLOADED,
+} from '../../utils/constants/actionTypes'
 
 export default (state = {}, action) => {
-	
   switch (action.type) {
     case ARTICLE_FAVORITED:
-			return {
-				...state,
-				articles: state.articles.map(article => {
-					if (article.slug === action.payload.article.slug) {
-						return {
-							...article,
-							favorited: action.payload.article.favorited,
-							favoritesCount: action.payload.article.favoritesCount
-						};
-					}
-					return article;
-				})
-			};
-    case ARTICLE_UNFAVORITED:
       return {
         ...state,
-        articles: state.articles.map(article => {
+        articles: state.articles.map((article) => {
           if (article.slug === action.payload.article.slug) {
             return {
               ...article,
               favorited: action.payload.article.favorited,
-              favoritesCount: action.payload.article.favoritesCount
-            };
+              favoritesCount: action.payload.article.favoritesCount,
+            }
           }
-          return article;
-        })
-      };
+          return article
+        }),
+      }
+    case ARTICLE_UNFAVORITED:
+      return {
+        ...state,
+        articles: state.articles.map((article) => {
+          if (article.slug === action.payload.article.slug) {
+            return {
+              ...article,
+              favorited: action.payload.article.favorited,
+              favoritesCount: action.payload.article.favoritesCount,
+            }
+          }
+          return article
+        }),
+      }
     case SET_PAGE:
       return {
         ...state,
         articles: action.payload.articles,
         articlesCount: action.payload.articlesCount,
-        currentPage: action.payload.page
-      };
+        currentPage: action.payload.page,
+      }
     case APPLY_TAG_FILTER:
       return {
         ...state,
@@ -58,8 +57,8 @@ export default (state = {}, action) => {
         articlesCount: action.payload.articlesCount,
         tab: null,
         tag: action.payload.tag,
-        currentPage: 0
-      };
+        currentPage: 0,
+      }
     case HOME_PAGE_LOADED:
       return {
         ...state,
@@ -68,10 +67,10 @@ export default (state = {}, action) => {
         articles: action.payload.articles || null,
         articlesCount: action.payload.articlesCount || null,
         currentPage: 0,
-        tab: action.payload.tab
-      };
+        tab: action.payload.tab,
+      }
     case HOME_PAGE_UNLOADED:
-      return {};
+      return {}
     case CHANGE_TAB:
       return {
         ...state,
@@ -80,8 +79,8 @@ export default (state = {}, action) => {
         articlesCount: action.payload.articlesCount,
         tab: action.payload.tab,
         currentPage: 0,
-        tag: null
-      };
+        tag: null,
+      }
     case PROFILE_PAGE_LOADED:
     case PROFILE_FAVORITES_PAGE_LOADED:
       return {
@@ -89,12 +88,12 @@ export default (state = {}, action) => {
         pager: action.pager,
         articles: action.payload[1] ? action.payload[1].articles : [],
         articlesCount: action.payload[1] ? action.payload[1].articlesCount : 0,
-        currentPage: 0
-      };
+        currentPage: 0,
+      }
     case PROFILE_PAGE_UNLOADED:
     case PROFILE_FAVORITES_PAGE_UNLOADED:
-      return {};
+      return {}
     default:
-      return state;
+      return state
   }
-};
+}

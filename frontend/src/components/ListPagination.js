@@ -1,7 +1,7 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { setPage } from '../services/actions/setPage';
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import styled from 'styled-components'
+import { setPage } from '../services/actions/setPage'
 import { ChevronIcon } from '../components/Icons'
 
 const PaginationNav = styled.nav`
@@ -10,13 +10,13 @@ const PaginationNav = styled.nav`
   align-content: center;
   max-width: 90%;
   margin: 0 auto;
-`;
+`
 const Pagination = styled.ul`
   display: flex;
   padding: 0;
   list-style: none;
   overflow: hidden;
-  `
+`
 const StyledPageItem = styled.li`
   display: flex;
   align-items: center;
@@ -31,37 +31,43 @@ const StyledPageItem = styled.li`
   &:last-of-type {
     border-radius: 0 20px 20px 0;
   }
-  ${props => props.active && `
+  ${(props) =>
+    props.active &&
+    `
     background: #ff0;
     border: 1px solid #ff0;
     cursor: inherit;
     pointer-events: none;
   `}
-`;
+`
 const PageLink = styled.a`
   text-decoration: none;
-  ${props => props.active && `
+  ${(props) =>
+    props.active &&
+    `
     cursor: inherit;
     pointer-events: none;
 `}
-`;
+`
 
 const ListPagination = () => {
-  const dispatch = useDispatch();
-  const { articlesCount, currentPage } = useSelector(state => state.articleList)
+  const dispatch = useDispatch()
+  const { articlesCount, currentPage } = useSelector(
+    (state) => state.articleList
+  )
 
-  if (articlesCount <= 10) return null;
+  if (articlesCount <= 10) return null
 
-  const range = [];
-    for (let i = 0; i < Math.ceil(articlesCount / 10); i += 1) {
-      range.push(i);
+  const range = []
+  for (let i = 0; i < Math.ceil(articlesCount / 10); i += 1) {
+    range.push(i)
   }
-  const startPage = range.shift();
-  const endPage = range.pop();
+  const startPage = range.shift()
+  const endPage = range.pop()
 
   const handlePaginationClick = (e, page) => {
-    e.preventDefault();
-    if (page === currentPage) return;
+    e.preventDefault()
+    if (page === currentPage) return
     dispatch(setPage(page))
   }
 
@@ -70,29 +76,41 @@ const ListPagination = () => {
       active={currentPage === page}
       onClick={(e) => handlePaginationClick(e, page)}
     >
-      <PageLink onClick={(e) => {e.preventDefault()}} active={currentPage === page} href="">{page + 1}</PageLink>
+      <PageLink
+        onClick={(e) => {
+          e.preventDefault()
+        }}
+        active={currentPage === page}
+        href=""
+      >
+        {page + 1}
+      </PageLink>
     </StyledPageItem>
   )
   const ChevronPage = ({ page, direction }) => (
     <StyledPageItem
       active={false}
       onClick={(e) => handlePaginationClick(e, page)}
-  >
-    <ChevronIcon direction={direction} />
-  </StyledPageItem>
+    >
+      <ChevronIcon direction={direction} />
+    </StyledPageItem>
   )
 
   const MiddlePageItems = () => {
-    if (!range.length) return null;
+    if (!range.length) return null
     return (
       <>
-        <ChevronPage direction="left" page={currentPage === startPage ? startPage : currentPage - 1} />
-        {
-          range.map(page => (
-            <PageItem page={page} key={page} />)
-            )
-          }
-        <ChevronPage direction="right" page={currentPage === endPage ? endPage : currentPage + 1} />
+        <ChevronPage
+          direction="left"
+          page={currentPage === startPage ? startPage : currentPage - 1}
+        />
+        {range.map((page) => (
+          <PageItem page={page} key={page} />
+        ))}
+        <ChevronPage
+          direction="right"
+          page={currentPage === endPage ? endPage : currentPage + 1}
+        />
       </>
     )
   }
@@ -105,7 +123,7 @@ const ListPagination = () => {
         <PageItem page={endPage} key={endPage} />
       </Pagination>
     </PaginationNav>
-  );
-};
+  )
+}
 
-export default ListPagination;
+export default ListPagination

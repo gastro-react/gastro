@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 import NavLink from './NavLink'
 import { CookIcon } from './AvatarIcons/index'
-import { loggedInNavigation, loggedOutNavigation } from '../utils/navigationconfig'
+import {
+  loggedInNavigation,
+  loggedOutNavigation,
+} from '../utils/navigationconfig'
 
 const StyledHeader = styled.header`
   box-sizing: border-box;
@@ -29,7 +32,7 @@ const LogoLink = styled(Link)`
   font-size: 20px;
   line-height: 20px;
   color: #000;
-  
+
   &:hover {
     text-decoration: none;
     cursor: pointer;
@@ -51,47 +54,44 @@ const StyledUl = styled.ul`
   align-items: center;
 `
 
-const Navigation = ({currentUser}) => {
-  let navItems;
+const Navigation = ({ currentUser }) => {
+  let navItems
 
   if (currentUser) {
-    navItems = [...loggedInNavigation, 
+    navItems = [
+      ...loggedInNavigation,
       {
         id: 'navigation-user',
         link: `/@${currentUser.username}`,
-        text: currentUser.username, 
-        icon: <CookIcon width="24px" height="24px" />  
+        text: currentUser.username,
+        icon: <CookIcon width="24px" height="24px" />,
       },
     ]
   } else {
     navItems = [...loggedOutNavigation]
   }
 
-    return (
-      <StyledUl>
-        { 
-        navItems.map(({id, link, text, icon}) => (
-          <li key={id}>
-            <NavLink link={link} text={text} icon={icon} />
-          </li>
-        ))
-        }
-      </StyledUl>
-    );
-};
+  return (
+    <StyledUl>
+      {navItems.map(({ id, link, text, icon }) => (
+        <li key={id}>
+          <NavLink link={link} text={text} icon={icon} />
+        </li>
+      ))}
+    </StyledUl>
+  )
+}
 
 const Header = () => {
-  const { currentUser, appName } = useSelector(state => state.common);
+  const { currentUser, appName } = useSelector((state) => state.common)
   return (
     <StyledHeader>
       <NavBar>
-        <LogoLink to="/" >
-          {appName.toLowerCase()}
-        </LogoLink>
+        <LogoLink to="/">{appName.toLowerCase()}</LogoLink>
         <Navigation currentUser={currentUser} />
       </NavBar>
     </StyledHeader>
-  );
+  )
 }
 
-export default Header;
+export default Header
