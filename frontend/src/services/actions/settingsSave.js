@@ -1,5 +1,5 @@
 import agent from '../../agent'
-import {SETTINGS_SAVED} from '../../utils/constants/actionTypes'
+import { SETTINGS_SAVED } from '../../utils/constants/actionTypes'
 
 export const settingsSave = (user) => {
   return (dispatch) => {
@@ -8,4 +8,4 @@ export const settingsSave = (user) => {
       .catch((e) => console.log(e))
   }
 }
-``
+;``

@@ -37,7 +37,8 @@
     "build": "react-scripts build",
     "test": "cross-env PORT=4100 react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "cd .. && husky install frontend/.husky"
   },
   "husky": {
     "hooks": {
