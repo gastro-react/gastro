@@ -33,7 +33,7 @@ const requests = {
       .then(responseBody),
   post: (url, body) =>
       superagent
-          .put(`${API_ROOT}${url}`, body)
+          .post(`${API_ROOT}${url}`, body)
           .use(tokenPlugin)
           .then(responseBody),
   post_article: (url, { article }) =>
