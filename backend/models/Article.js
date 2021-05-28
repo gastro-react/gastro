@@ -45,7 +45,7 @@ ArticleSchema.methods.toJSONFor = function(user){
   return {
     slug: this.slug,
     title: this.title,
-    image: process.env.NODE_ENV === 'production' ? `https://api.pickledbananas.com/${this.image}`: `http://localhost:3000/${this.image}` ,
+    image: `https://api.pickledbananas.com/${this.image}`, // process.env.NODE_ENV === 'production' ? `https://api.pickledbananas.com/${this.image}`: `http://localhost:3000/${this.image}` ,
     description: this.description,
     body: this.body,
     createdAt: this.createdAt,
