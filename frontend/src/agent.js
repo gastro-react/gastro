@@ -87,7 +87,7 @@ const Articles = {
   get: (slug) => requests.get(`/articles/${slug}`),
   unfavorite: (slug) => requests.del(`/articles/${slug}/favorite`),
   update: (article) =>
-    requests.put_article(`/articles/${article.slug}`, { article: omitSlug(article) }),
+    requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
   create: (article) => requests.post_article('/articles', { article }),
 }
 
