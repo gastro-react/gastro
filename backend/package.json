@@ -4,7 +4,7 @@
   "description": "practicum-project-kitchen on node",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./app.js",
+    "start": "node ./app.js",
     "dev": "nodemon ./app.js",
     "test": "newman run ./tests/api-tests.postman.json -e ./tests/env-api-tests.postman.json",
     "stop": "lsof -ti :3000 | xargs kill"
