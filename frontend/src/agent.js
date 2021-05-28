@@ -32,10 +32,20 @@ const requests = {
       .use(tokenPlugin)
       .then(responseBody),
   post: (url, body) =>
+      superagent
+          .put(`${API_ROOT}${url}`, body)
+          .use(tokenPlugin)
+          .then(responseBody),
+  post_article: (url, { article }) =>
     superagent
-      .post(`${API_ROOT}${url}`, body)
-      .use(tokenPlugin)
-      .then(responseBody),
+        .post(`${API_ROOT}${url}`)
+        .field('title', article.title)
+        .field('description', article.description)
+        .field('body', article.body)
+        .field('tagList', article.tagList)
+        .attach('image', article.image)
+        .use(tokenPlugin)
+        .then(responseBody),
 }
 
 const Auth = {
@@ -68,7 +78,7 @@ const Articles = {
   unfavorite: (slug) => requests.del(`/articles/${slug}/favorite`),
   update: (article) =>
     requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
-  create: (article) => requests.post('/articles', { article }),
+  create: (article) => requests.post_article('/articles', { article }),
 }
 
 const Comments = {

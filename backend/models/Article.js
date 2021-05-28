@@ -6,6 +6,9 @@ var User = mongoose.model('User');
 var ArticleSchema = new mongoose.Schema({
   slug: {type: String, lowercase: true, unique: true},
   title: String,
+  image: {
+    type: String
+  },
   description: String,
   body: String,
   favoritesCount: {type: Number, default: 0},
@@ -42,6 +45,7 @@ ArticleSchema.methods.toJSONFor = function(user){
   return {
     slug: this.slug,
     title: this.title,
+    image: process.env.NODE_ENV === 'production' ? `https://api.pickledbananas.com/${this.image}`: `http://localhost:3000/${this.image}` ,
     description: this.description,
     body: this.body,
     createdAt: this.createdAt,

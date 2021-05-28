@@ -31,10 +31,10 @@ if (!isProduction) {
 }
 
 if(isProduction){
-  mongoose.connect(process.env.MONGODB_URI);
+  mongoose.connect('mongodb://mongo/kitchen');
 } else {
   mongoose.connect('mongodb://mongo/kitchen');
-  // mongoose.connect('mongodb://127.0.0.1:27017/kitchen');
+  // mongoose.connect('mongodb://127.0.0.1:27018/kitchen');
 
   mongoose.set('debug', true);
 }
