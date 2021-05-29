@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import ArticleMeta from './ArticleMeta'
 import styled from 'styled-components'
 import { createComment } from '../../services/actions/createComment'
+import { SuisseNormalMediumText } from '../UI'
 
 const Form = styled.form`
   margin-bottom: 32px;
@@ -15,13 +16,8 @@ const CardFooter = styled.div`
   justify-content: space-between;
   padding: 24px;
 `
-const Textarea = styled.textarea`
-  font-family: 'Suisse Intl', sans-serif;
+const Textarea = styled(SuisseNormalMediumText)`
   border-right: 16px;
-  font-style: normal;
-  font-weight: 450;
-  line-height: 24px;
-  letter-spacing: 0;
   box-sizing: border-box;
   width: 100%;
   min-height: 120px;
@@ -38,15 +34,10 @@ const Textarea = styled.textarea`
     border: 1px solid #555454ff;
   }
 `
-const Button = styled.button`
+const Button = styled(SuisseNormalMediumText)`
   padding: 8px 16px;
   border-radius: 20px;
   text-decoration: none;
-  font-family: 'Suisse Intl', sans-serif;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 16px;
-  line-height: 24px;
   color: #0a0a0b;
   background-color: #ffff00;
   border: none;
@@ -70,6 +61,7 @@ const CommentInput = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Textarea
+        as="textarea"
         placeholder="Write a comment..."
         value={body}
         onChange={(ev) => setBody(ev.target.value)}
@@ -81,7 +73,7 @@ const CommentInput = () => {
           createdAt={new Date().toDateString()}
           theme="light"
         />
-        <Button type="submit">Post Comment</Button>
+        <Button as="button" type="submit">Post Comment</Button>
       </CardFooter>
     </Form>
   )

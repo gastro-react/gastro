@@ -5,10 +5,6 @@ import ListPagination from './ListPagination'
 import ArticlePreview from './ArticlePreview/ArticlePreview.jsx'
 
 const ArticleWrap = styled.div`
-  font-family: 'Suisse Intl', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.2;
   width: 100%;
   display: flex;
   padding: 20px 4px;

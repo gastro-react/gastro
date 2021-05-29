@@ -1,6 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import {
+  SpectralBoldExtraLargeText,
+  SpectralBoldMediumText
+} from '../UI'
 
 const Section = styled.section`
   width: 100%;
@@ -12,22 +16,12 @@ const StyledBanner = styled.div`
   padding: 32px;
   text-align: center;
 `
-const Title = styled.h1`
-  font-family: Spectral, serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 64px;
-  line-height: 64px;
-  text-align: center;
+const Title = styled(SpectralBoldExtraLargeText)`
+   text-align: center;
   color: #ffff00;
   margin-bottom: 8px;
 `
-const SubTitle = styled.p`
-  font-family: Spectral, serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
+const SubTitle = styled(SpectralBoldMediumText)`
   text-align: center;
   color: #fff;
 `
@@ -39,7 +33,7 @@ const Banner = () => {
   return (
     <Section>
       <StyledBanner>
-        <Title>{appName.toLowerCase()}</Title>
+        <Title as="h1">{appName.toLowerCase()}</Title>
         <SubTitle>{subtitle}</SubTitle>
       </StyledBanner>
     </Section>

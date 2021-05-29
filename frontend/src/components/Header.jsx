@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import NavLink from './NavLink'
 import { CookIcon } from './AvatarIcons/index'
+import { SpectralBoldMediumText } from './UI'
 import {
   loggedInNavigation,
   loggedOutNavigation,
@@ -24,13 +25,8 @@ const NavBar = styled.nav`
   justify-content: space-between;
   align-items: center;
 `
-const LogoLink = styled(Link)`
+const LogoLink = styled(SpectralBoldMediumText)`
   flex-basis: 30%;
-  font-family: 'Spectral', serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 20px;
   color: #000;
 
   &:hover {
@@ -87,7 +83,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <NavBar>
-        <LogoLink to="/">{appName.toLowerCase()}</LogoLink>
+        <LogoLink as={Link} to="/">{appName.toLowerCase()}</LogoLink>
         <Navigation currentUser={currentUser} />
       </NavBar>
     </StyledHeader>
