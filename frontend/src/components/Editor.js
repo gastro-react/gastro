@@ -36,9 +36,9 @@ class Editor extends React.Component {
     this.changeBody = updateFieldEvent('body')
     this.changeTagInput = updateFieldEvent('tagInput')
 
-    const updateFieldFileEvent =
-        key => ev => this.props.onUpdateField(key, ev.target.files[0]);
-    this.changeImage = updateFieldFileEvent('image');
+    const updateFieldFileEvent = (key) => (ev) =>
+      this.props.onUpdateField(key, ev.target.files[0])
+    this.changeImage = updateFieldFileEvent('image')
 
     this.watchForEnter = (ev) => {
       if (ev.keyCode === 13) {
@@ -117,9 +117,10 @@ class Editor extends React.Component {
 
                   <fieldset className="form-group">
                     <input
-                        className="form-control form-control-lg"
-                        type="file"
-                        onChange={this.changeImage} />
+                      className="form-control form-control-lg"
+                      type="file"
+                      onChange={this.changeImage}
+                    />
                   </fieldset>
 
                   <fieldset className="form-group">

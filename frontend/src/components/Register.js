@@ -9,6 +9,15 @@ import {
   LOGIN_PAGE_UNLOADED,
 } from '../utils/constants/actionTypes'
 import { register } from '../services/actions/register'
+import styled from 'styled-components/macro'
+import {AuthPage} from './Login'
+
+const RegisterPage = styled.div`
+${AuthPage}
+`
+
+console.log (AuthPage, RegisterPage);
+
 
 function Register() {
   const [email, setEmail] = useState('')
@@ -29,8 +38,10 @@ function Register() {
     return () => dispatch({ type: REGISTER_PAGE_UNLOADED })
   }, [])
 
-  return (
-    <div className="auth-page">
+	
+	
+	return (
+    <RegisterPage>
       <div className="container page">
         <div className="row">
           <div className="col-md-6 offset-md-3 col-xs-12">
@@ -80,7 +91,7 @@ function Register() {
           </div>
         </div>
       </div>
-    </div>
+    </RegisterPage>
   )
 }
 

@@ -1,10 +1,87 @@
 import { Link } from 'react-router-dom'
 import ListErrors from './ListErrors'
 import React, { useState, useEffect } from 'react'
-import agent from '../agent'
 import { useDispatch, useSelector } from 'react-redux'
-import { LOGIN, LOGIN_PAGE_UNLOADED } from '../utils/constants/actionTypes'
+import { LOGIN_PAGE_UNLOADED } from '../utils/constants/actionTypes'
 import { login } from '../services/actions/login'
+import styled from 'styled-components/macro'
+
+export const AuthPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+	border: 1px solid saddlebrown;
+`
+const AuthPageTitle = styled.h1`
+  font-family: Spectral, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 40px;
+  text-align: center;
+  color: #0a0a0b;
+  margin-top: 48px;
+`
+const AuthPageSubtitle = styled.p`
+  font-family: Suisse, sans-serif;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #0a0a0b;
+  margin-top: 40px;
+`
+const SubtitleLink = styled(Link)`
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  color: #0a0a0b;
+`
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 24px;
+`
+
+const FormFieldSet = styled.fieldset`
+  border: none;
+  padding: 0;
+  margin-bottom: 16px;
+`
+
+const InputElement = styled.input`
+  width: 540px;
+  height: 40px;
+  background: #f4f4f6;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 0;
+
+  &::placeholder {
+    font-family: Suisse, sans-serif;
+    font-style: normal;
+    font-weight: 450;
+    font-size: 16px;
+    line-height: 24px;
+    color: #62626a;
+    padding-left: 20px;
+  }
+`
+
+const SubmitButton = styled.button`
+  width: 120px;
+  height: 40px;
+  background: #ffff00;
+  border-radius: 20px;
+  border: none;
+  padding: 0;
+  align-self: flex-end;
+  margin-top: 8px;
+`
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -23,48 +100,34 @@ function Login() {
   }, [])
 
   return (
-    <div className="auth-page">
-      <div className="container page">
-        <div className="row">
-          <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">Sign In</h1>
-            <p className="text-xs-center">
-              <Link to="/register">Need an account?</Link>
-            </p>
-            <ListErrors errors={auth.errors} />
-            <form onSubmit={submitForm(email, password)}>
-              <fieldset>
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="email"
-                    placeholder="Email"
-                    value={email || ''}
-                    onChange={changeEmail}
-                  />
-                </fieldset>
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="password"
-                    placeholder="Password"
-                    value={password || ''}
-                    onChange={changePassword}
-                  />
-                </fieldset>
-                <button
-                  className="btn btn-lg btn-primary pull-xs-right"
-                  type="submit"
-                  disabled={auth.inProgress}
-                >
-                  Sign in
-                </button>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <AuthPage>
+      <AuthPageTitle>Sign In</AuthPageTitle>
+      <AuthPageSubtitle>
+        <SubtitleLink to="/register">Need an account?</SubtitleLink>
+      </AuthPageSubtitle>
+      <ListErrors errors={auth.errors} />
+      <Form onSubmit={submitForm(email, password)}>
+        <FormFieldSet>
+          <InputElement
+            type="email"
+            placeholder="Email"
+            value={email || ''}
+            onChange={changeEmail}
+          />
+        </FormFieldSet>
+        <FormFieldSet>
+          <InputElement
+            type="password"
+            placeholder="Password"
+            value={password || ''}
+            onChange={changePassword}
+          />
+        </FormFieldSet>
+        <SubmitButton type="submit" disabled={auth.inProgress}>
+          Sign in
+        </SubmitButton>
+      </Form>
+    </AuthPage>
   )
 }
 
