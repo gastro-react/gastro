@@ -21,25 +21,12 @@ const Switch = styled.div`
   align-items: center;
   justify-content: ${p => p.activeTheme === 'light' ? 'flex-start' : 'flex-end'};
 `
-const Knob = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-/*   background-color: ${p => p.theme.colors.chosen}; */
-`
-
-
-
 const ThemeToggler = () => {
   const dispatch = useDispatch();
   const { theme } = useSelector(state => state)
 
-
-
-  
   const toggleTheme = (e) => {
     e.preventDefault();
-    console.log('clicked')
     dispatch({ type: TOGGLE_THEME });
   }
 
@@ -51,9 +38,6 @@ const ThemeToggler = () => {
           : <SunIcon />
         }
       </Switch>
-
-
-
     </Wrapper>
   )
 }
