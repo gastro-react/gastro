@@ -116,9 +116,11 @@ const Article = (props) => {
           <ArticleActions canModify={canModify} article={article} />
         </MetaContainer>
       </Banner>
+
       <ArticleWrap as="article">
         <ArticleTitle as="h1">{article.title}</ArticleTitle>
         <ArticleImage src={article.image ? article.image : imagePots} alt={article.title} />
+
         <ArticleContent>
           <div dangerouslySetInnerHTML={markup} />
           <TagList>

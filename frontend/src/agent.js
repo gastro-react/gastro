@@ -27,35 +27,32 @@ const requests = {
   get: (url) =>
     superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
   put: (url, body) =>
+    superagent.put(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
+  put_article: (url, { article }) =>
     superagent
       .put(`${API_ROOT}${url}`)
+      .field('title', article.title)
+      .field('description', article.description)
+      .field('body', article.body)
+      .field('tagList', article.tagList)
+      .attach('image', article.image)
       .use(tokenPlugin)
       .then(responseBody),
-  put_article: (url, { article }) =>
-      superagent
-          .put(`${API_ROOT}${url}`)
-          .field('title', article.title)
-          .field('description', article.description)
-          .field('body', article.body)
-          .field('tagList', article.tagList)
-          .attach('image', article.image)
-          .use(tokenPlugin)
-          .then(responseBody),
   post: (url, body) =>
-      superagent
-          .post(`${API_ROOT}${url}`, body)
-          .use(tokenPlugin)
-          .then(responseBody),
+    superagent
+      .post(`${API_ROOT}${url}`, body)
+      .use(tokenPlugin)
+      .then(responseBody),
   post_article: (url, { article }) =>
     superagent
-        .post(`${API_ROOT}${url}`)
-        .field('title', article.title)
-        .field('description', article.description)
-        .field('body', article.body)
-        .field('tagList', article.tagList)
-        .attach('image', article.image)
-        .use(tokenPlugin)
-        .then(responseBody),
+      .post(`${API_ROOT}${url}`)
+      .field('title', article.title)
+      .field('description', article.description)
+      .field('body', article.body)
+      .field('tagList', article.tagList)
+      .attach('image', article.image)
+      .use(tokenPlugin)
+      .then(responseBody),
 }
 
 const Auth = {
