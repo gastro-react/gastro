@@ -9,6 +9,7 @@ import {
   loggedInNavigation,
   loggedOutNavigation,
 } from '../utils/navigationconfig'
+import ThemeToggler from './ThemeToggler'
 
 const StyledHeader = styled.header`
   box-sizing: border-box;
@@ -85,6 +86,7 @@ const Header = () => {
     <StyledHeader>
       <NavBar>
         <LogoLink as={Link} to="/">{appName.toLowerCase()}</LogoLink>
+        <ThemeToggler />
         <Navigation currentUser={currentUser} />
       </NavBar>
     </StyledHeader>

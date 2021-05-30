@@ -10,6 +10,7 @@ import editor from './services/reducers/editor'
 import home from './services/reducers/home'
 import profile from './services/reducers/profile'
 import settings from './services/reducers/settings'
+import theme from './services/reducers/theme'
 // import { routerReducer } from 'react-router-redux';
 // import { routerReducer } from 'connected-react-router';
 // import {history} from "./store";
@@ -25,5 +26,6 @@ export default combineReducers({
   home,
   profile,
   settings,
+  theme,
   router: connectRouter(history),
 })

@@ -13,7 +13,7 @@ export const Tag = styled.a`
   line-height: 1;
   border-radius: 100px;
   padding: 8px;
-  color: ${p => p.theme.colors.textSecondary};
+  color: ${p => p.theme.colors.textPrimary};
   transition: background-color 0.3s linear;
 
   &:hover {
