@@ -1,13 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import {
-  SpectralBoldExtraLargeText,
-  SpectralBoldMediumText
-} from '../../ui'
+import { SpectralBoldExtraLargeText, SpectralBoldMediumText } from '../../ui'
 
 const Section = styled.section`
-  background-color: ${p=> p.theme.colors.sectionBackground};
+  background-color: ${(p) => p.theme.colors.sectionBackground};
 `
 const StyledBanner = styled.div`
   margin: 0 auto;
@@ -16,12 +13,12 @@ const StyledBanner = styled.div`
 `
 const Title = styled(SpectralBoldExtraLargeText)`
   text-align: center;
-  color: ${p=> p.theme.colors.sectionTitle};
+  color: ${(p) => p.theme.colors.sectionTitle};
   margin-bottom: 8px;
 `
 const SubTitle = styled(SpectralBoldMediumText)`
   text-align: center;
-  color: ${p=> p.theme.colors.sectionSubtitle};
+  color: ${(p) => p.theme.colors.sectionSubtitle};
 `
 
 const Banner = () => {

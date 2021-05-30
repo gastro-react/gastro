@@ -17,7 +17,7 @@ import { LightTheme, DarkTheme, GlobalStyle } from '../ui/theme'
 
 const App = () => {
   const dispatch = useDispatch()
-  const { theme } = useSelector(state => state);
+  const { theme } = useSelector((state) => state)
   const { appLoaded, redirectTo } = useSelector((state) => state.common)
   useEffect(() => {
     const token = window.localStorage.getItem('jwt')
@@ -37,9 +37,8 @@ const App = () => {
     <ThemeProvider theme={theme.active === 'light' ? LightTheme : DarkTheme}>
       <GlobalStyle />
       <Header />
-      {
-        appLoaded &&
-        (<Switch>
+      {appLoaded && (
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
@@ -49,8 +48,8 @@ const App = () => {
           <Route path="/settings" component={Settings} />
           <Route path="/@:username/favorites" component={ProfileFavorites} />
           <Route path="/@:username" component={Profile} />
-        </Switch>)
-      }
+        </Switch>
+      )}
     </ThemeProvider>
   )
 }

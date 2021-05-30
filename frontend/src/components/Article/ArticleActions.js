@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { EditIcon, TrashIcon } from '../Icons'
 import { deleteArticle } from '../../services/actions/deleteArticle'
-import { SuisseNormalMediumText } from '../../ui';
+import { SuisseNormalMediumText } from '../../ui'
 
 const Actions = styled.span`
   display: flex;
@@ -47,7 +47,10 @@ const ArticleActions = (props) => {
         <LinkEdit as={Link} to={`/editor/${article.slug}`}>
           <EditIcon /> Edit Article
         </LinkEdit>
-        <DeleteButton as="button" onClick={() => dispatch(deleteArticle(article.slug))}>
+        <DeleteButton
+          as="button"
+          onClick={() => dispatch(deleteArticle(article.slug))}
+        >
           <TrashIcon color={'#F53D5C'} /> Delete Article
         </DeleteButton>
       </Actions>

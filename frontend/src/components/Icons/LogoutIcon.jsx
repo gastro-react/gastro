@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Svg = styled.svg`
   width: ${(props) => props.width || '24px'};
   height: ${(props) => props.height || '24px'};
-  stroke: ${p => p.theme.colors.textPrimary};
+  stroke: ${(p) => p.theme.colors.textPrimary};
 `
 
 const LogoutIcon = ({ width, height }) => (

@@ -8,7 +8,7 @@ const Svg = styled.svg`
   transition: all 0.2s ease-in-out;
 `
 const Circle = styled.circle`
-  stroke: ${p => p.theme.colors.textPrimary};
+  stroke: ${(p) => p.theme.colors.textPrimary};
 `
 
 const Icon = ({ width, height, color = '#0a0a0b', background = '#FFFF00' }) => (

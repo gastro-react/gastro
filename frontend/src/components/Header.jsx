@@ -29,7 +29,7 @@ const NavBar = styled.nav`
 const LogoLink = styled(SpectralBoldMediumText)`
   flex-basis: 30%;
   text-decoration: none;
-  color: ${p => p.theme.colors.textPrimary};
+  color: ${(p) => p.theme.colors.textPrimary};
 
   &:hover {
     text-decoration: none;
@@ -85,7 +85,9 @@ const Header = () => {
   return (
     <StyledHeader>
       <NavBar>
-        <LogoLink as={Link} to="/">{appName.toLowerCase()}</LogoLink>
+        <LogoLink as={Link} to="/">
+          {appName.toLowerCase()}
+        </LogoLink>
         <ThemeToggler />
         <Navigation currentUser={currentUser} />
       </NavBar>

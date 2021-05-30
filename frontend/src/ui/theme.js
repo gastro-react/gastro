@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    background-color: ${(p) => (getTheme(p).colors.background)}
+    background-color: ${(p) => getTheme(p).colors.background}
   }
 `
 export const LightTheme = {
@@ -21,7 +21,7 @@ export const LightTheme = {
     sectionTitle: '#ffff00',
     sectionSubtitle: '#fff',
     border: '#e0e0e0',
-    chosen: '#ff0'
+    chosen: '#ff0',
   },
 }
 export const DarkTheme = {
@@ -34,8 +34,8 @@ export const DarkTheme = {
     sectionTitle: '#ffff00',
     sectionSubtitle: '#fff',
     border: '#e0e0e0',
-    chosen: '#676700'
+    chosen: '#676700',
   },
 }
 
-export const getTheme = props => props.theme
+export const getTheme = (props) => props.theme

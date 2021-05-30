@@ -1,7 +1,7 @@
 import agent from '../../agent'
 import {
   ARTICLE_FAVORITED,
-  ARTICLE_UNFAVORITED, 
+  ARTICLE_UNFAVORITED,
 } from '../../utils/constants/actionTypes'
 
 export const likeArticle = (slug) => {

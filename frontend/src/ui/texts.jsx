@@ -30,5 +30,3 @@ export const SuisseNormalMediumText = styled(SuisseText)`
   font-size: 16px;
   line-height: 1.2;
 `
-
-
