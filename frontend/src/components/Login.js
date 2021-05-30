@@ -1,87 +1,18 @@
-import { Link } from 'react-router-dom'
 import ListErrors from './ListErrors'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOGIN_PAGE_UNLOADED } from '../utils/constants/actionTypes'
 import { login } from '../services/actions/login'
-import styled from 'styled-components/macro'
-
-export const AuthPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-	border: 1px solid saddlebrown;
-`
-const AuthPageTitle = styled.h1`
-  font-family: Spectral, sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 40px;
-  text-align: center;
-  color: #0a0a0b;
-  margin-top: 48px;
-`
-const AuthPageSubtitle = styled.p`
-  font-family: Suisse, sans-serif;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 16px;
-  line-height: 24px;
-  text-align: center;
-  color: #0a0a0b;
-  margin-top: 40px;
-`
-const SubtitleLink = styled(Link)`
-  cursor: pointer;
-  outline: none;
-  text-decoration: none;
-  color: #0a0a0b;
-`
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 24px;
-`
-
-const FormFieldSet = styled.fieldset`
-  border: none;
-  padding: 0;
-  margin-bottom: 16px;
-`
-
-const InputElement = styled.input`
-  width: 540px;
-  height: 40px;
-  background: #f4f4f6;
-  border: 1px solid #e0e0e0;
-  border-radius: 20px;
-  padding: 0;
-
-  &::placeholder {
-    font-family: Suisse, sans-serif;
-    font-style: normal;
-    font-weight: 450;
-    font-size: 16px;
-    line-height: 24px;
-    color: #62626a;
-    padding-left: 20px;
-  }
-`
-
-const SubmitButton = styled.button`
-  width: 120px;
-  height: 40px;
-  background: #ffff00;
-  border-radius: 20px;
-  border: none;
-  padding: 0;
-  align-self: flex-end;
-  margin-top: 8px;
-`
+import {
+  FormPage,
+  FormPageTitle,
+  FormPageSubtitle,
+  SubtitleLink,
+  Form,
+  FormFieldSet,
+  InputElement,
+  SubmitButton,
+} from '../ui/formPage'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -100,11 +31,11 @@ function Login() {
   }, [])
 
   return (
-    <AuthPage>
-      <AuthPageTitle>Sign In</AuthPageTitle>
-      <AuthPageSubtitle>
+    <FormPage>
+      <FormPageTitle>Sign In</FormPageTitle>
+      <FormPageSubtitle>
         <SubtitleLink to="/register">Need an account?</SubtitleLink>
-      </AuthPageSubtitle>
+      </FormPageSubtitle>
       <ListErrors errors={auth.errors} />
       <Form onSubmit={submitForm(email, password)}>
         <FormFieldSet>
@@ -127,7 +58,7 @@ function Login() {
           Sign in
         </SubmitButton>
       </Form>
-    </AuthPage>
+    </FormPage>
   )
 }
 
