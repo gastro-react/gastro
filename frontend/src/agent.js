@@ -3,13 +3,13 @@ import _superagent from 'superagent'
 
 const superagent = superagentPromise(_superagent, global.Promise)
 
-// const API_ROOT = process.env.API_HOST
-//   ? process.env.API_HOST
-//   : 'https://api.pickledbananas.com/api'
-
 const API_ROOT = process.env.API_HOST
   ? process.env.API_HOST
-  : 'http://localhost:3000/api'
+  : 'https://api.pickledbananas.com/api'
+
+// const API_ROOT = process.env.API_HOST
+//   ? process.env.API_HOST
+//   : 'http://localhost:3000/api'
 
 const encode = encodeURIComponent
 const responseBody = (res) => res.body
