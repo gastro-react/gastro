@@ -37,7 +37,17 @@ const ArticlePreview = (props) => {
 
   return (
     <div className={styles.ArticlePreviewContainer}>
-      <div className={styles.ImageThumbnail} style={article.image ? {backgroundImage: `url(${article.image})`, backgroundSize: 'cover'} : null} />
+      <div
+        className={styles.ImageThumbnail}
+        style={
+          article.image
+            ? {
+                backgroundImage: `url(${article.image})`,
+                backgroundSize: 'cover',
+              }
+            : null
+        }
+      />
       <div className={styles.ArticleDetails}>
         <div>
           <div className={styles.ArticleMeta}>
