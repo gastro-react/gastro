@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { applyTagFilter } from '../../services/actions/applyTagFilter'
-import { StyledTag } from '../UI'
+import { StyledTag } from '../../ui'
 
 const TagList = styled.div`
   padding-top: 8px;

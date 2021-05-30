@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { EditIcon, TrashIcon } from '../Icons'
 import { deleteArticle } from '../../services/actions/deleteArticle'
-import { SuisseNormalMediumText } from '../UI';
+import { SuisseNormalMediumText } from '../../ui';
 
 const Actions = styled.span`
   display: flex;

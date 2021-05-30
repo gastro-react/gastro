@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Tag = styled.a`
   text-decoration: none;
-  background: ${({ chosen }) => (chosen ? '#ff0' : '#f4f4f4')};
-  border: 1px solid #e0e0e0;
+  background-color: ${p => p.chosen ? p.theme.colors.chosen : p.theme.colors.articleBackground};
+  border: 1px solid ${p => p.theme.colors.border};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,11 +13,10 @@ export const Tag = styled.a`
   line-height: 1;
   border-radius: 100px;
   padding: 8px;
-  color: #000;
+  color: ${p => p.theme.colors.textSecondary};
   transition: background-color 0.3s linear;
 
   &:hover {
-    color: inherit;
     transform: scale(1.1);
     text-decoration: none;
   }

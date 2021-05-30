@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import ArticleMeta from './ArticleMeta'
 import styled from 'styled-components'
 import { createComment } from '../../services/actions/createComment'
-import { SuisseNormalMediumText } from '../UI'
+import { SuisseNormalMediumText } from '../../ui'
 
 const Form = styled.form`
   margin-bottom: 32px;

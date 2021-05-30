@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import NavLink from './NavLink'
 import { CookIcon } from './AvatarIcons/index'
-import { SpectralBoldMediumText } from './UI'
+import { SpectralBoldMediumText } from '../ui'
 import {
   loggedInNavigation,
   loggedOutNavigation,
@@ -27,7 +27,8 @@ const NavBar = styled.nav`
 `
 const LogoLink = styled(SpectralBoldMediumText)`
   flex-basis: 30%;
-  color: #000;
+  text-decoration: none;
+  color: ${p => p.theme.colors.textPrimary};
 
   &:hover {
     text-decoration: none;

@@ -12,7 +12,7 @@ import styled from 'styled-components'
 import ArticleActions from './ArticleActions'
 import imagePots from './pots.jpg'
 import { getAllArticleInfo } from '../../services/actions/getAllArticleInfo'
-import { SpectralBoldLargeText, SuisseNormalMediumText } from '../UI'
+import { SpectralBoldLargeText, SuisseNormalMediumText } from '../../ui'
 
 const ArticleWrap = styled(SuisseNormalMediumText)`
   max-width: 1140px;

@@ -10,14 +10,14 @@ const SidebarWrap = styled.div`
   max-width: 25%;
   padding: 16px;
   height: fit-content;
-  background-color: #f4f4f4;
+  background-color: ${p => p.theme.colors.articleBackground};
   border-radius: 12px;
 `
 const SidebarTitle = styled.p`
   font-family: source sans pro, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  color: #373a3c;
+  color: ${p => p.theme.colors.textPrimary};
 `
 
 const Sidebar = () => (

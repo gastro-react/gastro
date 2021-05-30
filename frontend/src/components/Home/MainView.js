@@ -6,7 +6,7 @@ import {
   getAllArticlesOnTabChange,
   getFeedArticlesOnTabChange,
 } from '../../services/actions/getArticlesOnTabChange'
-import { SuisseNormalMediumText } from '../UI'
+import { SuisseNormalMediumText } from '../../ui'
 
 const StyledMainView = styled.div`
   position: relative;
@@ -26,21 +26,15 @@ const TabsList = styled.ul`
   justify-content: flex-start;
 `
 const NavItem = styled.li`
+  cursor: pointer;
   box-sizing: border-box;
   padding: 0;
   list-style-type: none;
   padding: 8px 16px;
-  border-bottom: 2px solid transparent;
-  color: #aaa;
+  border-bottom: 2px solid ${p => !p.active ? 'transparent' : p.theme.colors.textPrimary};
+  color: ${p => p.active ? p.theme.colors.textPrimary : p.theme.colors.textSecondary};
   background: transparent;
 
-  ${(props) =>
-    props.active === true
-      ? `
-      border-bottom: 2px solid #000;
-      color: #000;
-    `
-      : ''}
 `
 const NavLink = styled(SuisseNormalMediumText)`
   color: inherit;

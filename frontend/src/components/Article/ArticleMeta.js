@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
 import CookIcon from '../AvatarIcons/CookIcon'
-import { SuisseNormalMediumText } from '../UI'
+import { SuisseNormalMediumText } from '../../ui'
 
 const ArticleMetaWrap = styled.div`
   display: flex;

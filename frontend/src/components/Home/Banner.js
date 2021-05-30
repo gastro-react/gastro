@@ -4,12 +4,10 @@ import styled from 'styled-components'
 import {
   SpectralBoldExtraLargeText,
   SpectralBoldMediumText
-} from '../UI'
+} from '../../ui'
 
 const Section = styled.section`
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #1c1c22;
+  background-color: ${p=> p.theme.colors.Sectionbackground};
 `
 const StyledBanner = styled.div`
   margin: 0 auto;
@@ -17,13 +15,13 @@ const StyledBanner = styled.div`
   text-align: center;
 `
 const Title = styled(SpectralBoldExtraLargeText)`
-   text-align: center;
-  color: #ffff00;
+  text-align: center;
+  color: ${p=> p.theme.colors.sectionTitle};
   margin-bottom: 8px;
 `
 const SubTitle = styled(SpectralBoldMediumText)`
   text-align: center;
-  color: #fff;
+  color: ${p=> p.theme.colors.sectionSubtitle};
 `
 
 const Banner = () => {
