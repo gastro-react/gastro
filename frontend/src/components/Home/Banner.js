@@ -7,7 +7,7 @@ import {
 } from '../../ui'
 
 const Section = styled.section`
-  background-color: ${p=> p.theme.colors.Sectionbackground};
+  background-color: ${p=> p.theme.colors.sectionBackground};
 `
 const StyledBanner = styled.div`
   margin: 0 auto;

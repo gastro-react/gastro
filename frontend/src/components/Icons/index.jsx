@@ -13,6 +13,8 @@ import ThumbsIcon from './ThumbsIcon'
 import FollowingIcon from './FollowingIcon'
 import LogoutIcon from './LogoutIcon'
 import LoginIcon from './LoginIcon'
+import SunIcon from './SunIcon'
+import MoonIcon from './MoonIcon'
 
 export {
   LikeIcon,
@@ -30,4 +32,6 @@ export {
   FollowingIcon,
   LogoutIcon,
   LoginIcon,
+  SunIcon,
+  MoonIcon
 }
