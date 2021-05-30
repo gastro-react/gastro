@@ -34,7 +34,7 @@ export const DarkTheme = {
     sectionTitle: '#ffff00',
     sectionSubtitle: '#fff',
     border: '#e0e0e0',
-    chosen: '#fff'
+    chosen: '#676700'
   },
 }
 
