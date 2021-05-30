@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
 import CookIcon from '../AvatarIcons/CookIcon'
+import { SuisseNormalMediumText } from '../UI'
 
 const ArticleMetaWrap = styled.div`
-  font-family: 'Suisse Intl', sans-serif;
   display: flex;
   justify-content: space-between;
 `
@@ -13,19 +13,11 @@ const ArticleInfo = styled.div`
   margin-left: 8px;
 `
 
-const ArticleDate = styled.div`
-  font-family: inherit;
-  font-size: 12px;
-  line-height: 16px;
+const ArticleDate = styled(SuisseNormalMediumText)`
   color: ${(props) => (props.theme === 'dark' ? '#fff' : '#62626A')};
 `
 
-const NavLink = styled(Link)`
-  font-family: inherit;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 450;
-  line-height: 24px;
+const NavLink = styled(SuisseNormalMediumText)`
   text-decoration: none;
   color: ${(props) => (props.theme === 'dark' ? '#fff' : '#0A0A0B')};
 `
@@ -47,7 +39,7 @@ const ArticleMeta = (props) => {
         )}
       </NavLink>
       <ArticleInfo>
-        <NavLink theme={theme} to={`/@${author.username}`}>
+        <NavLink as={Link} theme={theme} to={`/@${author.username}`}>
           {author.username}
         </NavLink>
         <ArticleDate theme={theme}>

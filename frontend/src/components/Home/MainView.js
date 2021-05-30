@@ -6,6 +6,7 @@ import {
   getAllArticlesOnTabChange,
   getFeedArticlesOnTabChange,
 } from '../../services/actions/getArticlesOnTabChange'
+import { SuisseNormalMediumText } from '../UI'
 
 const StyledMainView = styled.div`
   position: relative;
@@ -41,11 +42,7 @@ const NavItem = styled.li`
     `
       : ''}
 `
-const NavLink = styled.a`
-  font-family: 'Suisse Intl', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
+const NavLink = styled(SuisseNormalMediumText)`
   color: inherit;
   display: block;
   text-decoration: none;
@@ -70,7 +67,7 @@ const YourFeedTab = ({ token, active, onTabClick }) =>
 
 const GlobalFeedTab = ({ onTabClick, active }) => (
   <NavItem active={active} onClick={onTabClick}>
-    <NavLink href="" onClick={() => {}}>
+    <NavLink as="a" href="" onClick={() => {}}>
       Global Feed
     </NavLink>
   </NavItem>
@@ -80,6 +77,7 @@ const TagFilterTab = ({ tag }) =>
   tag ? (
     <NavItem active={true}>
       <NavLink
+        as="a"
         href=""
         onClick={(e) => {
           e.preventDefault()

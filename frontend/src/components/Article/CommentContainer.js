@@ -4,14 +4,9 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
+import { SpectralBoldMediumText } from '../UI'
 
-const CommentsTitle = styled.h3`
-  font-family: 'Spectral', sans-serif;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 28px;
-  letter-spacing: 0;
+const CommentsTitle = styled(SpectralBoldMediumText)`
   margin: 32px 0;
 `
 
@@ -21,7 +16,7 @@ const CommentContainer = (props) => {
   if (currentUser) {
     return (
       <>
-        <CommentsTitle>Comments</CommentsTitle>
+        <CommentsTitle as="h3">Comments</CommentsTitle>
         <div>
           {/*<list-errors errors={props.errors}></list-errors>*/}
           <CommentInput />
@@ -36,7 +31,7 @@ const CommentContainer = (props) => {
   } else {
     return (
       <>
-        <CommentsTitle>Comments</CommentsTitle>
+        <CommentsTitle as="h3">Comments</CommentsTitle>
         <p>
           <Link to="/login">Sign in</Link>
           &nbsp;or&nbsp;
