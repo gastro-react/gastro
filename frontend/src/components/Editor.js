@@ -15,16 +15,12 @@ import {
 import {
   FormPage,
   FormPageTitle,
-  FormPageSubtitle,
-  SubtitleLink,
   Form,
   FormFieldSet,
   InputElement,
   TextAreaElement,
   SubmitButton,
 } from '../ui/formPage'
-
-import { Tag } from '../ui/tags'
 
 const TagList = styled.ul`
   list-style: none;
@@ -98,9 +94,7 @@ function Editor(props) {
   useEffect(() => {
     if (props.match.params.slug) {
       agent.Articles.get(props.match.params.slug).then((article) => {
-        console.log('article', article)
-        const payload = article
-        dispatch({ type: EDITOR_PAGE_LOADED, payload })
+        dispatch({ type: EDITOR_PAGE_LOADED, article })
       })
     }
     const payload = null
