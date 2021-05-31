@@ -36,6 +36,7 @@ const requests = {
       .field('body', article.body)
       .field('tagList', article.tagList)
       .attach('image', article.image)
+
       .use(tokenPlugin)
       .then(responseBody),
   post: (url, body) =>
