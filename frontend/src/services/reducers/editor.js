@@ -9,6 +9,7 @@ import {
 } from '../../utils/constants/actionTypes'
 
 export default (state = {}, action) => {
+  console.log(action.type, action)
   switch (action.type) {
     case EDITOR_PAGE_LOADED:
       return {

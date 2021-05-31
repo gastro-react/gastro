@@ -99,7 +99,7 @@ const ArticlePreview = ({ article }) => {
       {article.author.image ? (
         <StyledAvatar
           src={article.author.image}
-          className={styles.AutorsAvatar}
+          // className={styles.AutorsAvatar}
           alt={article.author.username}
         />
       ) : (
