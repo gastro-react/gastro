@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Svg = styled.svg`
   width: ${(props) => props.width || '24px'};
   height: ${(props) => props.height || '24px'};
-  stroke: ${p => p.theme.colors.textPrimary};
+  stroke: ${(p) => p.theme.colors.textPrimary};
   transition: all 0.2s ease-in-out;
 `
 
@@ -22,11 +22,7 @@ const HomeIcon = ({ width, height }) => (
       strokeWidth="2"
       strokeLinecap="round"
     />
-    <path
-      d="M9 22V12H15V22"
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
+    <path d="M9 22V12H15V22" strokeWidth="2" strokeLinecap="round" />
   </Svg>
 )
 

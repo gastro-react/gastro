@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Tag = styled.a`
   text-decoration: none;
-  background-color: ${p => p.chosen ? p.theme.colors.chosen : p.theme.colors.articleBackground};
-  border: 1px solid ${p => p.theme.colors.border};
+  background-color: ${(p) =>
+    p.chosen ? p.theme.colors.chosen : p.theme.colors.articleBackground};
+  border: 1px solid ${(p) => p.theme.colors.border};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +14,7 @@ export const Tag = styled.a`
   line-height: 1;
   border-radius: 100px;
   padding: 8px;
-  color: ${p => p.theme.colors.textPrimary};
+  color: ${(p) => p.theme.colors.textPrimary};
   transition: background-color 0.3s linear;
 
   &:hover {

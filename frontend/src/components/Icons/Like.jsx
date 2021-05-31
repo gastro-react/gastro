@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Svg = styled.svg`
-  width: ${p => p.width || '24px'};
-  height: ${p => p.height || '24px'};
-  fill: ${p => p.liked ? p.theme.colors.textPrimary : 'none'};
-  stroke: ${p => p.theme.colors.textPrimary};
+  width: ${(p) => p.width || '24px'};
+  height: ${(p) => p.height || '24px'};
+  fill: ${(p) => (p.liked ? p.theme.colors.textPrimary : 'none')};
+  stroke: ${(p) => p.theme.colors.textPrimary};
   transition: fill 0.2s ease-in-out;
 `
 

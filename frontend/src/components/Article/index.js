@@ -119,7 +119,10 @@ const Article = (props) => {
 
       <ArticleWrap as="article">
         <ArticleTitle as="h1">{article.title}</ArticleTitle>
-        <ArticleImage src={article.image ? article.image : imagePots} alt={article.title} />
+        <ArticleImage
+          src={article.image ? article.image : imagePots}
+          alt={article.title}
+        />
 
         <ArticleContent>
           <div dangerouslySetInnerHTML={markup} />

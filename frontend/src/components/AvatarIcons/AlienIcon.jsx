@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Svg = styled.svg`
   width: ${(props) => props.width || '40px'};
   height: ${(props) => props.height || '40px'};
-  stroke: ${p => p.theme.colors.textPrimary};
+  stroke: ${(p) => p.theme.colors.textPrimary};
   transition: all 0.2s ease-in-out;
 `
 
@@ -16,13 +16,7 @@ const Icon = ({ width, height, color = '#0a0a0b', background = '#FFFF00' }) => (
     width={width}
     height={height}
   >
-    <circle
-      cx="20"
-      cy="20"
-      r="19"
-      fill={background}
-      strokeWidth="2"
-    />
+    <circle cx="20" cy="20" r="19" fill={background} strokeWidth="2" />
     <path
       fill={color}
       fillRule="evenodd"

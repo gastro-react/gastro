@@ -73,7 +73,9 @@ const CommentInput = () => {
           createdAt={new Date().toDateString()}
           theme="light"
         />
-        <Button as="button" type="submit">Post Comment</Button>
+        <Button as="button" type="submit">
+          Post Comment
+        </Button>
       </CardFooter>
     </Form>
   )

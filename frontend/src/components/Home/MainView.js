@@ -31,10 +31,11 @@ const NavItem = styled.li`
   padding: 0;
   list-style-type: none;
   padding: 8px 16px;
-  border-bottom: 2px solid ${p => !p.active ? 'transparent' : p.theme.colors.textPrimary};
-  color: ${p => p.active ? p.theme.colors.textPrimary : p.theme.colors.textSecondary};
+  border-bottom: 2px solid
+    ${(p) => (!p.active ? 'transparent' : p.theme.colors.textPrimary)};
+  color: ${(p) =>
+    p.active ? p.theme.colors.textPrimary : p.theme.colors.textSecondary};
   background: transparent;
-
 `
 const NavLink = styled(SuisseNormalMediumText)`
   color: inherit;

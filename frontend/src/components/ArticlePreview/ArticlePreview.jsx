@@ -14,10 +14,10 @@ const ArticlePreviewContainer = styled.div`
   padding: 20px 0;
   font-family: 'Spectral', serif;
 `
-const ArticleTitle =  styled(SpectralBoldMediumText)`
+const ArticleTitle = styled(SpectralBoldMediumText)`
   margin-top: 16px;
   margin-bottom: 8px;
-  color: ${p => p.theme.colors.textPrimary};
+  color: ${(p) => p.theme.colors.textPrimary};
   text-decoration: none;
 `
 const ArticleDetails = styled.div`
@@ -33,11 +33,11 @@ const ArticleMeta = styled.div`
 const ImageThumbnail = styled.div`
   flex: 0 0 160px;
   height: 228px;
-  background-color: ${p => p.theme.colors.articleBackground};
+  background-color: ${(p) => p.theme.colors.articleBackground};
   border-radius: 20px;
   margin-right: 20px;
   background-size: cover;
-  background-image: ${p => p.image};
+  background-image: ${(p) => p.image};
 `
 const StyledInfo = styled.div`
   margin-left: 8px;
@@ -62,20 +62,20 @@ const Tags = styled.div`
   flex-wrap: wrap;
 `
 const StyledDateAndSecondary = styled(SuisseNormalMediumText)`
-  color: ${p => p.theme.colors.textSecondary}
+  color: ${(p) => p.theme.colors.textSecondary};
 `
 const ReadMore = styled(SuisseNormalMediumText)`
-  color: ${p => p.theme.colors.textPrimary}
+  color: ${(p) => p.theme.colors.textPrimary};
 `
 const Author = styled(SuisseNormalMediumText)`
-  color: ${p => p.theme.colors.textPrimary};
+  color: ${(p) => p.theme.colors.textPrimary};
   text-decoration: none;
 `
 const Favorites = styled(SuisseNormalMediumText)`
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: ${p => p.theme.colors.textPrimary};
+  color: ${(p) => p.theme.colors.textPrimary};
 `
 const ReadMoreAndTagsContainer = styled.div`
   display: flex;
@@ -99,7 +99,7 @@ const ArticlePreview = ({ article }) => {
       {article.author.image ? (
         <StyledAvatar
           src={article.author.image}
-          className={styles.AutorsAvatar}
+          // className={styles.AutorsAvatar}
           alt={article.author.username}
         />
       ) : (
@@ -109,10 +109,8 @@ const ArticlePreview = ({ article }) => {
   )
 
   const ArticleInfo = () => (
-    <StyledInfo >
-      <Author as={Link}
-        to={`/@${article.author.username}`}
-      >
+    <StyledInfo>
+      <Author as={Link} to={`/@${article.author.username}`}>
         {article.author.username}
       </Author>
       <StyledDateAndSecondary>
@@ -123,7 +121,9 @@ const ArticlePreview = ({ article }) => {
 
   return (
     <ArticlePreviewContainer>
-      <ImageThumbnail image={article.image ? `url(${article.image})` : 'none'} />
+      <ImageThumbnail
+        image={article.image ? `url(${article.image})` : 'none'}
+      />
       <ArticleDetails>
         <div>
           <ArticleMeta>
@@ -140,16 +140,20 @@ const ArticlePreview = ({ article }) => {
 
           <StyledLink to={`/article/${article.slug}`} className="preview-link">
             <ArticleTitle as="h3">{article.title}</ArticleTitle>
-            <StyledDateAndSecondary>{article.description}</StyledDateAndSecondary>
+            <StyledDateAndSecondary>
+              {article.description}
+            </StyledDateAndSecondary>
           </StyledLink>
         </div>
 
-        <ReadMoreAndTagsContainer >
+        <ReadMoreAndTagsContainer>
           <StyledLink to={`/article/${article.slug}`}>
             <ReadMore>Read more...</ReadMore>
           </StyledLink>
           <Tags>
-            {article.tagList.map((tag) => (<Tag key={tag} tag={tag} />))}
+            {article.tagList.map((tag) => (
+              <Tag key={tag} tag={tag} />
+            ))}
           </Tags>
         </ReadMoreAndTagsContainer>
       </ArticleDetails>

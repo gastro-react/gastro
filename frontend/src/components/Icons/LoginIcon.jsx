@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Svg = styled.svg`
-  width: ${p => p.width || '24px'};
-  height: ${p => p.height || '24px'};
-  stroke: ${p => p.theme.colors.textPrimary};
+  width: ${(p) => p.width || '24px'};
+  height: ${(p) => p.height || '24px'};
+  stroke: ${(p) => p.theme.colors.textPrimary};
 `
 
 const LoginIcon = ({ width, height }) => (

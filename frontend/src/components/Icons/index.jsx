@@ -33,5 +33,5 @@ export {
   LogoutIcon,
   LoginIcon,
   SunIcon,
-  MoonIcon
+  MoonIcon,
 }

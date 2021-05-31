@@ -1,6 +1,4 @@
-import {
-  TOGGLE_THEME,
-} from '../../utils/constants/actionTypes'
+import { TOGGLE_THEME } from '../../utils/constants/actionTypes'
 
 const initialState = {
   active: 'light',

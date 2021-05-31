@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { SuisseNormalMediumText } from '../ui';
+import { SuisseNormalMediumText } from '../ui'
 
 const StyledLink = styled(SuisseNormalMediumText)`
   text-decoration: none;
-  color: ${p=> p.theme.colors.textPrimary};
+  color: ${(p) => p.theme.colors.textPrimary};
   padding: 8px 16px;
   box-sizing: border-box;
   display: flex;

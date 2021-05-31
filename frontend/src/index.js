@@ -9,13 +9,13 @@ import App from './components/App'
 
 ReactDOM.render(
   <Provider store={store}>
-      <BrowserRouter>
-        <ConnectedRouter history={history}>
-          <Switch>
-            <Route path="/" component={App} />
-          </Switch>
-        </ConnectedRouter>
-      </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
+    <BrowserRouter>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route path="/" component={App} />
+        </Switch>
+      </ConnectedRouter>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
 )
