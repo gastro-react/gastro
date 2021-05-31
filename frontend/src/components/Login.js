@@ -1,10 +1,18 @@
-import { Link } from 'react-router-dom'
 import ListErrors from './ListErrors'
 import React, { useState, useEffect } from 'react'
-import agent from '../agent'
 import { useDispatch, useSelector } from 'react-redux'
-import { LOGIN, LOGIN_PAGE_UNLOADED } from '../utils/constants/actionTypes'
+import { LOGIN_PAGE_UNLOADED } from '../utils/constants/actionTypes'
 import { login } from '../services/actions/login'
+import {
+  FormPage,
+  FormPageTitle,
+  FormPageSubtitle,
+  SubtitleLink,
+  Form,
+  FormFieldSet,
+  InputElement,
+  SubmitButton,
+} from '../ui/formPage'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -23,48 +31,34 @@ function Login() {
   }, [])
 
   return (
-    <div className="auth-page">
-      <div className="container page">
-        <div className="row">
-          <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">Sign In</h1>
-            <p className="text-xs-center">
-              <Link to="/register">Need an account?</Link>
-            </p>
-            <ListErrors errors={auth.errors} />
-            <form onSubmit={submitForm(email, password)}>
-              <fieldset>
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="email"
-                    placeholder="Email"
-                    value={email || ''}
-                    onChange={changeEmail}
-                  />
-                </fieldset>
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="password"
-                    placeholder="Password"
-                    value={password || ''}
-                    onChange={changePassword}
-                  />
-                </fieldset>
-                <button
-                  className="btn btn-lg btn-primary pull-xs-right"
-                  type="submit"
-                  disabled={auth.inProgress}
-                >
-                  Sign in
-                </button>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <FormPage>
+      <FormPageTitle>Sign In</FormPageTitle>
+      <FormPageSubtitle>
+        <SubtitleLink to="/register">Need an account?</SubtitleLink>
+      </FormPageSubtitle>
+      <ListErrors errors={auth.errors} />
+      <Form onSubmit={submitForm(email, password)}>
+        <FormFieldSet>
+          <InputElement
+            type="email"
+            placeholder="Email"
+            value={email || ''}
+            onChange={changeEmail}
+          />
+        </FormFieldSet>
+        <FormFieldSet>
+          <InputElement
+            type="password"
+            placeholder="Password"
+            value={password || ''}
+            onChange={changePassword}
+          />
+        </FormFieldSet>
+        <SubmitButton type="submit" disabled={auth.inProgress}>
+          Sign in
+        </SubmitButton>
+      </Form>
+    </FormPage>
   )
 }
 

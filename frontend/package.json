@@ -29,6 +29,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.3",
     "styled-components.macro": "^1.0.0",
+    "styled-normalize": "^8.0.7",
     "superagent": "^6.1.0",
     "superagent-promise": "^1.1.0"
   },

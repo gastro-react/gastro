@@ -2,14 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { SuisseNormalMediumText } from '../ui'
 
-const StyledLink = styled(Link)`
-  font-family: 'Suisse Intl', sans-serif;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 16px;
-  line-height: 20px;
-  color: #000;
+const StyledLink = styled(SuisseNormalMediumText)`
+  text-decoration: none;
+  color: ${(p) => p.theme.colors.textPrimary};
   padding: 8px 16px;
   box-sizing: border-box;
   display: flex;
@@ -32,7 +29,7 @@ const StyledLink = styled(Link)`
 
 const NavLink = ({ link, text, icon }) => {
   return (
-    <StyledLink to={link}>
+    <StyledLink as={Link} to={link}>
       {icon}
       {text}
     </StyledLink>

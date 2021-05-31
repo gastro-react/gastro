@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { EditIcon, TrashIcon } from '../Icons'
 import { deleteArticle } from '../../services/actions/deleteArticle'
+import { SuisseNormalMediumText } from '../../ui'
 
 const Actions = styled.span`
   display: flex;
@@ -11,7 +12,7 @@ const Actions = styled.span`
   align-items: center;
 `
 
-const LinkEdit = styled(Link)`
+const LinkEdit = styled(SuisseNormalMediumText)`
   padding: 8px 16px;
   background-color: #ffff00;
   border-radius: 20px;
@@ -20,25 +21,15 @@ const LinkEdit = styled(Link)`
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  font-family: 'Suisse Intl', sans-serif;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 16px;
-  line-height: 24px;
 `
 
-const DeleteButton = styled.button`
+const DeleteButton = styled(SuisseNormalMediumText)`
   padding: 8px 0 8px 16px;
   border-radius: 20px;
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  font-family: 'Suisse Intl', sans-serif;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 16px;
-  line-height: 24px;
   color: #f53d5c;
   background-color: #1c1c22;
   border: none;
@@ -53,10 +44,13 @@ const ArticleActions = (props) => {
   if (props.canModify) {
     return (
       <Actions>
-        <LinkEdit to={`/editor/${article.slug}`}>
+        <LinkEdit as={Link} to={`/editor/${article.slug}`}>
           <EditIcon /> Edit Article
         </LinkEdit>
-        <DeleteButton onClick={() => dispatch(deleteArticle(article.slug))}>
+        <DeleteButton
+          as="button"
+          onClick={() => dispatch(deleteArticle(article.slug))}
+        >
           <TrashIcon color={'#F53D5C'} /> Delete Article
         </DeleteButton>
       </Actions>

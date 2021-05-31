@@ -12,16 +12,14 @@ import styled from 'styled-components'
 import ArticleActions from './ArticleActions'
 import imagePots from './pots.jpg'
 import { getAllArticleInfo } from '../../services/actions/getAllArticleInfo'
+import { SpectralBoldLargeText, SuisseNormalMediumText } from '../../ui'
 
-const ArticleWrap = styled.div`
+const ArticleWrap = styled(SuisseNormalMediumText)`
   max-width: 1140px;
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 0 16px;
-  font-family: 'Suisse Intl', sans-serif;
-  font-style: normal;
-  font-weight: 450;
 `
 const Banner = styled.div`
   color: #fff;
@@ -39,12 +37,7 @@ const MetaContainer = styled.div`
   color: #fff;
 `
 
-const ArticleTitle = styled.h1`
-  font-family: 'Spectral', sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 40px;
+const ArticleTitle = styled(SpectralBoldLargeText)`
   margin: 0;
   padding: 16px 0;
   color: #0a0a0b;
@@ -123,9 +116,14 @@ const Article = (props) => {
           <ArticleActions canModify={canModify} article={article} />
         </MetaContainer>
       </Banner>
-      <ArticleWrap>
-        <ArticleTitle>{article.title}</ArticleTitle>
-        <ArticleImage src={article.image ? article.image : imagePots} alt={article.title} />
+
+      <ArticleWrap as="article">
+        <ArticleTitle as="h1">{article.title}</ArticleTitle>
+        <ArticleImage
+          src={article.image ? article.image : imagePots}
+          alt={article.title}
+        />
+
         <ArticleContent>
           <div dangerouslySetInnerHTML={markup} />
           <TagList>

@@ -7,6 +7,9 @@ const Svg = styled.svg`
   height: ${(props) => props.height || '40px'};
   transition: all 0.2s ease-in-out;
 `
+const Circle = styled.circle`
+  stroke: ${(p) => p.theme.colors.textPrimary};
+`
 
 const Icon = ({ width, height, color = '#0a0a0b', background = '#FFFF00' }) => (
   <Svg
@@ -15,7 +18,7 @@ const Icon = ({ width, height, color = '#0a0a0b', background = '#FFFF00' }) => (
     width={width}
     height={height}
   >
-    <circle
+    <Circle
       cx="20"
       cy="20"
       r="19"

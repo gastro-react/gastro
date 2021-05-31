@@ -27,8 +27,7 @@ const getMiddleware = () => {
       thunk,
       myRouterMiddleware,
       promiseMiddleware,
-      localStorageMiddleware,
-      createLogger()
+      localStorageMiddleware
     )
   }
 }
