@@ -6,9 +6,9 @@ const Svg = styled.svg`
   width: ${(props) => props.width || '24px'};
   height: ${(props) => props.height || '24px'};
   stroke: ${(p) => p.theme.colors.textPrimary};
-  transition: fill 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   transform: ${(props) =>
-    props.direction === 'right' ? 'none' : 'rotate(180deg)'};
+    props.direction === 'left' ? 'rotate(180deg)' : props.direction === 'down' ? 'rotate(90deg)' : 'none'};
 `
 
 const ChevronIcon = ({ direction = 'right', width, height }) => (

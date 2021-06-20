@@ -5,8 +5,10 @@ import SettingsForm from './SettingsForm'
 import { SETTINGS_PAGE_UNLOADED, LOGOUT } from '../utils/constants/actionTypes'
 import { settingsSave } from '../services/actions/settingsSave'
 import { FormPage, FormPageTitle, LogoutButton, HR } from '../ui/formPage'
+import { useTranslation } from 'react-i18next'
 
 function Settings() {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
   const { currentUser } = useSelector((state) => state.common)
@@ -19,12 +21,12 @@ function Settings() {
 
   return (
     <FormPage>
-      <FormPageTitle>Your Settings</FormPageTitle>
+      <FormPageTitle>{t('pages.settings.title')}</FormPageTitle>
       <ListErrors errors={settings.errors} />
       <SettingsForm currentUser={currentUser} onSubmitForm={onSubmitForm} />
       <HR />
       <LogoutButton onClick={onClickLogout}>
-        Or click here to logout.
+        {t('buttons.logout')}
       </LogoutButton>
     </FormPage>
   )

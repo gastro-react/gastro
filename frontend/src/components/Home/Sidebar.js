@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import Tags from './Tags'
 
@@ -20,11 +21,14 @@ const SidebarTitle = styled.p`
   color: ${(p) => p.theme.colors.textPrimary};
 `
 
-const Sidebar = () => (
-  <SidebarWrap>
-    <SidebarTitle>Popular Tags</SidebarTitle>
-    <Tags />
-  </SidebarWrap>
-)
+const Sidebar = () => {
+  const { t } = useTranslation()
+  return (
+    <SidebarWrap>
+      <SidebarTitle>{t('pages.sidebar')}</SidebarTitle>
+      <Tags />
+    </SidebarWrap>
+  )
+}
 
 export default Sidebar

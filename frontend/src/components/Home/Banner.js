@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { SpectralBoldExtraLargeText, SpectralBoldMediumText } from '../../ui'
@@ -22,14 +23,14 @@ const SubTitle = styled(SpectralBoldMediumText)`
 `
 
 const Banner = () => {
+  const { t } = useTranslation();
   const { appName } = useSelector((state) => state.common)
-  const subtitle = 'the new experience is cooked here...' // delete hardcode!!
 
   return (
     <Section>
       <StyledBanner>
         <Title as="h1">{appName.toLowerCase()}</Title>
-        <SubTitle>{subtitle}</SubTitle>
+        <SubTitle>{t('pages.banner.subtitle')}</SubTitle>
       </StyledBanner>
     </Section>
   )

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { SuisseNormalMediumText } from '../ui'
+import { useTranslation } from 'react-i18next';
 
 const StyledLink = styled(SuisseNormalMediumText)`
   text-decoration: none;
@@ -28,10 +29,11 @@ const StyledLink = styled(SuisseNormalMediumText)`
 `
 
 const NavLink = ({ link, text, icon }) => {
+  const { t } = useTranslation();
   return (
     <StyledLink as={Link} to={link}>
       {icon}
-      {text}
+      {t(text)}
     </StyledLink>
   )
 }

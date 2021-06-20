@@ -9,19 +9,19 @@ const loggedInNavigation = [
   {
     id: 'navigation-main',
     link: '/',
-    text: 'Main',
+    text: 'navigation.main',
     icon: <HomeIcon />,
   },
   {
     id: 'navigation-new_post',
     link: '/editor',
-    text: 'New post',
+    text: 'navigation.newPost',
     icon: <EditIcon />,
   },
   {
     id: 'navigation-settings',
     link: '/settings',
-    text: 'Settings',
+    text: 'navigation.settings',
     icon: <SettingsIcon />,
   },
 ]
@@ -30,13 +30,13 @@ const loggedOutNavigation = [
   {
     id: 'navigation-main',
     link: '/',
-    text: 'Main',
+    text: 'navigation.main',
     icon: <HomeIcon />,
   },
   {
     id: 'navigation-login',
     link: '/login',
-    text: 'Login',
+    text: 'navigation.login',
     icon: <LoginIcon />,
   },
 ]
