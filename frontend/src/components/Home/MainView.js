@@ -7,6 +7,7 @@ import {
   getFeedArticlesOnTabChange,
 } from '../../services/actions/getArticlesOnTabChange'
 import { SuisseNormalMediumText } from '../../ui'
+import { useTranslation } from 'react-i18next'
 
 const StyledMainView = styled.div`
   position: relative;
@@ -51,22 +52,27 @@ const NavLink = styled(SuisseNormalMediumText)`
     color: inherit;
   }
 `
-const YourFeedTab = ({ token, active, onTabClick }) =>
-  token ? (
+
+const YourFeedTab = ({ token, active, onTabClick }) => {
+  const { t } = useTranslation();
+  return token ? (
     <NavItem active={active} onClick={onTabClick}>
       <NavLink href="" onClick={() => {}}>
-        Your Feed
+        {t('navigation.feed')}
       </NavLink>
     </NavItem>
   ) : null
-
-const GlobalFeedTab = ({ onTabClick, active }) => (
-  <NavItem active={active} onClick={onTabClick}>
-    <NavLink as="a" href="" onClick={() => {}}>
-      Global Feed
-    </NavLink>
-  </NavItem>
-)
+}
+const GlobalFeedTab = ({ onTabClick, active }) => {
+  const { t } = useTranslation();
+    return (
+    <NavItem active={active} onClick={onTabClick}>
+      <NavLink as="a" href="" onClick={() => {}}>
+        {t('navigation.global')}
+      </NavLink>
+    </NavItem>
+  )
+}
 
 const TagFilterTab = ({ tag }) =>
   tag ? (

@@ -10,6 +10,7 @@ import {
   loggedOutNavigation,
 } from '../utils/navigationconfig'
 import ThemeToggler from './ThemeToggler'
+import LanguageSwitcher from './LanguageSwitcher'
 
 const StyledHeader = styled.header`
   box-sizing: border-box;
@@ -89,6 +90,7 @@ const Header = () => {
           {appName.toLowerCase()}
         </LogoLink>
         <ThemeToggler />
+        <LanguageSwitcher />
         <Navigation currentUser={currentUser} />
       </NavBar>
     </StyledHeader>
