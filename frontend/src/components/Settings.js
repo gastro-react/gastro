@@ -25,9 +25,7 @@ function Settings() {
       <ListErrors errors={settings.errors} />
       <SettingsForm currentUser={currentUser} onSubmitForm={onSubmitForm} />
       <HR />
-      <LogoutButton onClick={onClickLogout}>
-        {t('buttons.logout')}
-      </LogoutButton>
+      <LogoutButton onClick={onClickLogout}>{t('buttons.logout')}</LogoutButton>
     </FormPage>
   )
 }

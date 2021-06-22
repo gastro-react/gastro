@@ -1,6 +1,6 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
 import en from './utils/locales/en'
 import ru from './utils/locales/ru'
 
@@ -16,12 +16,12 @@ i18n
     debug: true,
     fallbackLng: 'en',
     interpolation: {
-      escapeValue: false, 
+      escapeValue: false,
     },
     resources: {
       en,
       ru,
-    }
-  });
+    },
+  })
 
-export default i18n;
+export default i18n

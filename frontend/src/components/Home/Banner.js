@@ -23,7 +23,7 @@ const SubTitle = styled(SpectralBoldMediumText)`
 `
 
 const Banner = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const { appName } = useSelector((state) => state.common)
 
   return (
