@@ -5,7 +5,7 @@ import { store, history } from './store'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import App from './components/App'
-import './i18n.js';
+import './i18n.js'
 
 ReactDOM.render(
   <Provider store={store}>

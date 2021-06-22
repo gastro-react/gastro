@@ -54,7 +54,7 @@ const NavLink = styled(SuisseNormalMediumText)`
 `
 
 const YourFeedTab = ({ token, active, onTabClick }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return token ? (
     <NavItem active={active} onClick={onTabClick}>
       <NavLink href="" onClick={() => {}}>
@@ -64,8 +64,8 @@ const YourFeedTab = ({ token, active, onTabClick }) => {
   ) : null
 }
 const GlobalFeedTab = ({ onTabClick, active }) => {
-  const { t } = useTranslation();
-    return (
+  const { t } = useTranslation()
+  return (
     <NavItem active={active} onClick={onTabClick}>
       <NavLink as="a" href="" onClick={() => {}}>
         {t('navigation.global')}

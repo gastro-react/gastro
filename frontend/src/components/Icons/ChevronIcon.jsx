@@ -8,7 +8,11 @@ const Svg = styled.svg`
   stroke: ${(p) => p.theme.colors.textPrimary};
   transition: all 0.2s ease-in-out;
   transform: ${(props) =>
-    props.direction === 'left' ? 'rotate(180deg)' : props.direction === 'down' ? 'rotate(90deg)' : 'none'};
+    props.direction === 'left'
+      ? 'rotate(180deg)'
+      : props.direction === 'down'
+      ? 'rotate(90deg)'
+      : 'none'};
 `
 
 const ChevronIcon = ({ direction = 'right', width, height }) => (

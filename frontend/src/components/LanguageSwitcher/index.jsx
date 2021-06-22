@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { useTranslation } from 'react-i18next';
-import { ChevronIcon } from '../Icons';
+import { useTranslation } from 'react-i18next'
+import { ChevronIcon } from '../Icons'
 import { SuisseNormalMediumText } from '../../ui'
 
 const LanguageSwitcher = styled(SuisseNormalMediumText)`
@@ -12,7 +12,7 @@ const LanguageSwitcher = styled(SuisseNormalMediumText)`
   align-items: center;
   justify-items: center;
   justify-content: center;
-  font-family: 'Suisse Intl',sans-serif;
+  font-family: 'Suisse Intl', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -21,7 +21,6 @@ const LanguageSwitcher = styled(SuisseNormalMediumText)`
   cursor: pointer;
 `
 const DropDownMenu = styled.div`
-
   display: flex;
   gap: 4px;
   padding: 4px;
@@ -35,8 +34,8 @@ const Button = styled(SuisseNormalMediumText)`
   border: 1px solid #e0e0e0;
   color: #000;
   text-decoration: none;
-  background-color: ${(p) => p.active ? '#ff0' : '#f4f4f4'};
-  font-weight: ${(p) => p.active ? 'bold' : 'normal'};
+  background-color: ${(p) => (p.active ? '#ff0' : '#f4f4f4')};
+  font-weight: ${(p) => (p.active ? 'bold' : 'normal')};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,30 +50,37 @@ const Button = styled(SuisseNormalMediumText)`
 `
 const langs = {
   en: { nativeName: 'EN' },
-  ru: { nativeName: 'RU' }
-};
+  ru: { nativeName: 'RU' },
+}
 
 export default () => {
-  const [dropped, setDropped] = useState(false);
-  const { i18n } = useTranslation();
+  const [dropped, setDropped] = useState(false)
+  const { i18n } = useTranslation()
   const handleSubmit = (e, lng) => {
-    e.preventDefault();
-    i18n.changeLanguage(lng);
+    e.preventDefault()
+    i18n.changeLanguage(lng)
   }
 
   return (
-    <LanguageSwitcher as="div" onClick={() => setDropped(!dropped)} >
-      {dropped ? null : langs[i18n.language].nativeName }
-      <ChevronIcon direction={dropped ? "right" : "down"} />
+    <LanguageSwitcher as="div" onClick={() => setDropped(!dropped)}>
+      {dropped ? null : langs[i18n.language].nativeName}
+      <ChevronIcon direction={dropped ? 'right' : 'down'} />
 
-      { dropped && 
-      <DropDownMenu>
-        {Object.keys(langs).map((lng) => (
-          <Button as="a" key={lng} type="submit" active={i18n.language === lng} onClick={(e) => handleSubmit(e, lng)}>
-            {langs[lng].nativeName}
-          </Button>))}
-      </DropDownMenu>
-      }
-  </LanguageSwitcher>
+      {dropped && (
+        <DropDownMenu>
+          {Object.keys(langs).map((lng) => (
+            <Button
+              as="a"
+              key={lng}
+              type="submit"
+              active={i18n.language === lng}
+              onClick={(e) => handleSubmit(e, lng)}
+            >
+              {langs[lng].nativeName}
+            </Button>
+          ))}
+        </DropDownMenu>
+      )}
+    </LanguageSwitcher>
   )
 }
