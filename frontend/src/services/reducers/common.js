@@ -36,8 +36,6 @@ export default (state = defaultState, action) => {
       return { ...state, redirectTo: null }
     case LOGOUT:
       return { ...state, redirectTo: '/', token: null, currentUser: null }
-    case ARTICLE_SUBMITTED:
-      console.log(action.article, action.article.article.slug)
       const redirectUrl = `/article/${action.article.article.slug}`
       return { ...state, redirectTo: redirectUrl }
     case SETTINGS_SAVED:

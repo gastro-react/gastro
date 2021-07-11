@@ -82,7 +82,6 @@ function Editor(props) {
 
     const slug = { slug: editor.articleSlug }
 
-    console.log(article)
     console.log(Object.assign(article, slug))
     editor.articleSlug
       ? agent.Articles.update(Object.assign(article, slug))
